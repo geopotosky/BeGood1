@@ -329,9 +329,7 @@ class BudgetTableViewController: UITableViewController, NSFetchedResultsControll
     
     //-Print the To Do List
     @IBAction func printList(_ sender: UIBarButtonItem) {
-//    }
-//    func printListPage(){
-        
+
         //-Take a snapshot of the screen
         let rect: CGRect = view.bounds
         UIGraphicsBeginImageContextWithOptions(rect.size, true, 0.0)

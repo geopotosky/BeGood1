@@ -33,7 +33,6 @@ class TodoTableViewController: UITableViewController, NSFetchedResultsController
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(TodoTableViewController.addTodoList))
         
         //-Create toolBarItems
-        //let toolBar1 = self.editButtonItem
         //let toolBar2 = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
         //        //let toolBar3 = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(TodoTableViewController.printListPage))
         
@@ -266,8 +265,6 @@ class TodoTableViewController: UITableViewController, NSFetchedResultsController
     
     //-Print the To Do List
     @IBAction func printList(_ sender: UIBarButtonItem) {
-//    }
-//    func printListPage(){
         
         //-Take a snapshot of the screen
         let rect: CGRect = view.bounds
