@@ -30,8 +30,8 @@ class BeGoodAddEventViewController: UIViewController, UIImagePickerControllerDel
     let eventTextDelegate = EventTextDelegate()
     
     //-Global objects, properties & variables
-    var events: Events!
-    //var events: [Events]!
+    //var events: Events!
+    var events: [Events]!
     var eventIndex2:Int!
     var eventIndexPath2: IndexPath!
     var todaysDate: Date!
@@ -42,6 +42,7 @@ class BeGoodAddEventViewController: UIViewController, UIImagePickerControllerDel
     var calendarID: String!
     var changedEventImage: UIImage!
     //var section: Int!
+    var eventItemCounter: Int!
     
 
     
@@ -214,6 +215,14 @@ class BeGoodAddEventViewController: UIViewController, UIImagePickerControllerDel
         return CoreDataStackManager.sharedInstance().managedObjectContext!
         }()
     
+    
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        let sectionInfo = self.fetchedResultsController.sections![section]
+//        eventItemCounter = sectionInfo.numberOfObjects
+//        print(eventItemCounter)
+//        return sectionInfo.numberOfObjects
+//        
+//    }
     
     
     //-Fetched Results Controller
@@ -423,12 +432,216 @@ class BeGoodAddEventViewController: UIViewController, UIImagePickerControllerDel
                 
                     
                 //-Update selected event
-                event.eventDate = self.currentEventDate
-                event.textEvent = textFieldEvent.text!
-                event.eventImage = eventImage
-                event.textCalendarID = calendarID
-                self.sharedContext.refresh(event, mergeChanges: true)
-                CoreDataStackManager.sharedInstance().saveContext()
+//                event.eventDate = self.currentEventDate
+//                event.textEvent = textFieldEvent.text!
+//                    print("textEvent:", textFieldEvent.text!)
+//                    
+//                event.eventImage = eventImage
+//                event.textCalendarID = calendarID
+                    
+                    
+                    
+//                    if #available(iOS 8.3, *) {
+//                        self.sharedContext.refreshAllObjects()
+//                    } else {
+//                        // Fallback on earlier versions
+//                    }
+                //self.sharedContext.refresh(event, mergeChanges: true)
+//                    do {
+//                        try self.sharedContext.save()
+//                    } catch {
+//                        // Do something in response to error condition
+//                    }
+                    
+                    
+//                    let predicate = NSPredicate(format: "events == %@", self.events)
+//                    
+//                    let fetchRequest = NSFetchRequest<Events>(entityName: "Events")
+//                    fetchRequest.predicate = predicate
+//                    
+//                    do {
+//                        //let fetchedEntities = try self.sharedContext.executeFetchRequest(fetchRequest) as! [MyEntity]
+//                        let fetchedEntities = try self.sharedContext.execute(fetchRequest)
+//                        fetchedEntities.first?.FirstPropertyToUpdate = NewValue
+//                        fetchedEntities.first?.SecondPropertyToUpdate = NewValue
+//                        // ... Update additional properties with new value
+//
+//                    } catch {
+//                        // Do something in response to error condition
+//                    }
+//                    
+//                    do {
+//                        try self.sharedContext.save()
+//                    } catch {
+//                        // Do something in response to error condition
+//                    }
+                    
+                    
+                    
+//                    let fetchRequest = NSFetchRequest<Events>(entityName: "Events")
+//                    fetchRequest.sortDescriptors = [NSSortDescriptor(key: "textEvent", ascending: true)]
+//                    fetchRequest.predicate = NSPredicate(format: "textEvents == %@", self.textFieldEvent!);
+//                    //fetchRequest.predicate = predicate
+//                    //var obj = ctx.execute(fetchRequest)
+//                    if (fetchRequest.predicate != self.textFieldEvent) {
+//                        print("No duplicates")
+//                        print(fetchRequest.predicate)
+//                        print(self.textFieldEvent.text!)
+////                        //not there so create it and save
+////                        obj = ctx.insertNewManagedObject(forEntity: "Favorite")
+////                        //typed inline, dont know actual method
+////                        obj.stationIdentifier = stID
+////                        ctx.save()
+//                    }
+//                    //use obj... e.g.
+//                    //print("\(obj.stationIdentifier)")
+                    
+                    
+
+//                    let fetchRequest = NSFetchRequest<Events>(entityName: "Events")
+//                    let result = try self.sharedContext.fetch(fetchRequest) {
+//                        print(result.count)
+//                        if eventItemCounter > 0 {
+//                            var index : Int = 0
+//                            for event in events{
+//                            
+//                                if self.textFieldEvent.text == event.textEvent {
+//                                    print("found duplicate")
+//                                    break;
+//                                }
+//                            
+//                                index += 1
+//                            }
+//                        
+//                        } else {
+//                            print("Could not find any duplicates")
+//                        
+//                        }
+//                    }
+//                    catch {
+//
+//                    }
+                    
+//                    //-GOOD STUFF-------------------
+//                    let tempText: String = "textEvent == \"" + self.textFieldEvent.text! + "\""
+//                    print("Looking for: ", tempText)
+//                    // Initialize Fetch Request
+//                    let fetchRequest = NSFetchRequest<Events>(entityName: "Events")
+//                    //fetchRequest.predicate = NSPredicate(format: "textEvent == %@", textFieldEvent.text!);
+//                    //print(fetchRequest.predicate)
+//                    let result = try self.sharedContext.fetch(fetchRequest){
+//                    print(result.count)
+//                    
+//                    // Create Entity Description
+//                    let entityDescription = NSEntityDescription.entity(forEntityName: "Events", in: self.sharedContext)
+//                    
+//                    // Configure Fetch Request
+//                    fetchRequest.entity = entityDescription
+//                    //print("predicate value:", fetchRequest.predicate!)
+//                    
+//                    //print("comparing predicate:", String(describing: fetchRequest.predicate!))
+//                    print("comparing current textEvent:", tempText)
+//                    
+//                    //if String(describing: fetchRequest.predicate!) == tempText{
+//                    if fetchRequest.predicate != nil{
+//                        print("Found a Duplicate")
+//                    }
+//                    //--------------------------------
+//                    }
+                    
+                    
+                    //-Prevent dupicates Event Names
+                    do {
+                    let fetchRequest = NSFetchRequest<Events>(entityName: "Events")
+                    fetchRequest.predicate = NSPredicate(format: "textEvent == %@", textFieldEvent.text!);
+                    let result = try self.sharedContext.fetch(fetchRequest)
+                        print(fetchRequest.predicate)
+                        print(result.count)
+                        if result.count == 1 {
+                            print("Duplicate found")
+                            self.alertMessage = "Duplicate Event Title Found. Use a unique Event Title."
+                            self.textAlertMessage()
+                        }
+                        else {
+                            event.textEvent = textFieldEvent.text!
+                            event.eventDate = self.currentEventDate
+                            event.eventImage = eventImage
+                            event.textCalendarID = calendarID
+                            self.sharedContext.refresh(event, mergeChanges: true)
+                            CoreDataStackManager.sharedInstance().saveContext()
+                        }
+                    }
+                    catch {
+                        self.alertMessage = "No events found. Try again."
+                        self.textAlertMessage()
+                    }
+
+                    
+                    
+//                    do {
+//                        let fetchRequest = NSFetchRequest<Events>(entityName: "Events")
+//                        let result = try self.sharedContext.fetch(fetchRequest as! NSFetchRequest<NSFetchRequestResult>){
+//                        print(result)
+//                        print(fetchRequest.predicate!)
+//                        
+//                        print(event.textEvent!)
+//                        print(self.textFieldEvent.text!)
+////                        if fetchRequest.predicate! = self.textFieldEvent.text!{
+////                            print("Found a Duplicate")
+////                        }
+//                        
+//                        
+//                        }
+//                        if result.count > 0 {
+//                            var index : Int = 0
+//                            for results in result{
+//                                
+//                                if self.textFieldEvent.text! == event.textEvent! {
+//                                    print("found duplicate")
+//                                    break;
+//                                }
+//                                
+//                                index += 1
+//                            }
+//                                                        
+//                        } else {
+//                            print("Could not find any duplicates")
+//
+//                        }
+//                        print("counter", result.count)
+//                        
+//                    } catch {
+//                        let fetchError = error as NSError
+//                        print(fetchError)
+//                    }
+            
+                    
+//                    //var entity = NSEntityDescription.entity(forName: "Students", inManagedObjectContext: managedObjectContext)!
+//                    let entity = NSEntityDescription.entity(forEntityName: "Events", in: self.sharedContext)
+//                    //let request = NSFetchRequest()
+//                    let request = NSFetchRequest<Events>(entityName: "Events")
+//                    request.entity = entity
+//                    var sortDescriptor = NSSortDescriptor(key: "Events", ascending: false)
+//                    var sortDescriptors = [sortDescriptor]
+//                    request.sortDescriptors = sortDescriptors
+//                    //sortDescriptor.release()
+//                    //NSError * Fetcherror
+//                    let fetchResults = try self.sharedContext.fetch(request)
+//                    if fetchResults.isEmpty {
+//                        print("No Duplicates")
+//                    }
+//                    if (fetchResults.value(forKey: "textEvent") as! String).contains(self.textFieldEvent.text!) {
+//                        //notify duplicates
+//                        return
+//                    }
+//                    else {
+//                        //write your code to add data
+//                    }
+                    
+                    
+                    
+                    
+//                CoreDataStackManager.sharedInstance().saveContext()
                 
                 //-Create a corresponding local notification
                 dateFormatter.dateFormat = "MMM dd 'at' h:mm a" // example: "Jan 01 at 12:00 PM"
@@ -465,30 +678,77 @@ class BeGoodAddEventViewController: UIViewController, UIImagePickerControllerDel
                 }else {
                 
                 
-                    //-Save new event
-                    let _ = Events(eventDate: self.currentEventDate, textEvent: textFieldEvent.text!, eventImage: eventImage, textCalendarID: nil, context: sharedContext)
-            
-                    //-Save the shared context, using the convenience method in the CoreDataStackManager
-                    CoreDataStackManager.sharedInstance().saveContext()
+                    //-Prevent dupicates Event Names
+                    do {
+                        let fetchRequest = NSFetchRequest<Events>(entityName: "Events")
+                        fetchRequest.predicate = NSPredicate(format: "textEvent == %@", textFieldEvent.text!);
+                        let result = try self.sharedContext.fetch(fetchRequest)
+                        print(fetchRequest.predicate)
+                        print(result.count)
+                        if result.count == 1 {
+                            print("Duplicate found")
+                            self.alertMessage = "Duplicate Event Title Found. Use a unique Event Title."
+                            self.textAlertMessage()
+                        }
+                        else {
+                            //-Save new event
+                            let _ = Events(eventDate: self.currentEventDate, textEvent: textFieldEvent.text!, eventImage: eventImage, textCalendarID: nil, context: sharedContext)
+                            
+                            //-Save the shared context, using the convenience method in the CoreDataStackManager
+                            CoreDataStackManager.sharedInstance().saveContext()
+                            
+                            //-Create a corresponding local notification
+                            let dateFormatter = DateFormatter()
+                            dateFormatter.dateFormat = "MMM dd 'at' h:mm a" // example: "Jan 01 at 12:00 PM"
+                            
+                            let notification = UILocalNotification()
+                            notification.alertBody = "Event \(textFieldEvent.text!) - on \"\(dateFormatter.string(from: self.currentEventDate))\" is Overdue" // text that will be displayed in the notification
+                            notification.alertAction = "open" // text that is displayed after "slide to..." on the lock screen - defaults to "slide to view"
+                            notification.fireDate = self.currentEventDate // todo item due date (when notification will be fired)
+                            notification.soundName = UILocalNotificationDefaultSoundName // play default sound
+                            notification.userInfo = ["UUID": String(describing: self.currentEventDate)]
+                            UIApplication.shared.scheduleLocalNotification(notification)
+                            
+                            
+                            self.navigationController!.popViewController(animated: true)
+                            
+                        }
+                    }
+                    catch {
+                        self.alertMessage = "No events found. Try again."
+                        self.textAlertMessage()
+                    }
+                    
+                    
+                    
+//                    //-Save new event
+//                    let _ = Events(eventDate: self.currentEventDate, textEvent: textFieldEvent.text!, eventImage: eventImage, textCalendarID: nil, context: sharedContext)
+//            
+//                    //-Save the shared context, using the convenience method in the CoreDataStackManager
+//                    CoreDataStackManager.sharedInstance().saveContext()
                 
-                    //-Create a corresponding local notification
-                    let dateFormatter = DateFormatter()
-                    dateFormatter.dateFormat = "MMM dd 'at' h:mm a" // example: "Jan 01 at 12:00 PM"
-                
-                    let notification = UILocalNotification()
-                    notification.alertBody = "Event \(textFieldEvent.text!) - on \"\(dateFormatter.string(from: self.currentEventDate))\" is Overdue" // text that will be displayed in the notification
-                    notification.alertAction = "open" // text that is displayed after "slide to..." on the lock screen - defaults to "slide to view"
-                    notification.fireDate = self.currentEventDate // todo item due date (when notification will be fired)
-                    notification.soundName = UILocalNotificationDefaultSoundName // play default sound
-                    notification.userInfo = ["UUID": String(describing: self.currentEventDate)]
-                    UIApplication.shared.scheduleLocalNotification(notification)
-                
-            
-                    self.navigationController!.popViewController(animated: true)
+                    
+                    
+//                    //-Create a corresponding local notification
+//                    let dateFormatter = DateFormatter()
+//                    dateFormatter.dateFormat = "MMM dd 'at' h:mm a" // example: "Jan 01 at 12:00 PM"
+//                
+//                    let notification = UILocalNotification()
+//                    notification.alertBody = "Event \(textFieldEvent.text!) - on \"\(dateFormatter.string(from: self.currentEventDate))\" is Overdue" // text that will be displayed in the notification
+//                    notification.alertAction = "open" // text that is displayed after "slide to..." on the lock screen - defaults to "slide to view"
+//                    notification.fireDate = self.currentEventDate // todo item due date (when notification will be fired)
+//                    notification.soundName = UILocalNotificationDefaultSoundName // play default sound
+//                    notification.userInfo = ["UUID": String(describing: self.currentEventDate)]
+//                    UIApplication.shared.scheduleLocalNotification(notification)
+//                
+//            
+//                    self.navigationController!.popViewController(animated: true)
                 }
             }
     }
     
+
+
     
     //-Alert Message function
     func textAlertMessage(){

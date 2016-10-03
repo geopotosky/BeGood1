@@ -45,6 +45,7 @@ class BeGoodShowViewController : UIViewController, NSFetchedResultsControllerDel
     var editEventFlag: Bool!
     var mgFactorValue: Int! = 0
     var shareEventImage: UIImage!
+    var textEvent2: String!
     
     //-Time Related Variables
     var timeAtPress = Date()
@@ -547,6 +548,7 @@ class BeGoodShowViewController : UIViewController, NSFetchedResultsControllerDel
             let popoverController = (segue.destination as? BeGoodPopoverViewController)
             let event = fetchedResultsController.object(at: eventIndexPath)
             popoverController!.eventIndexPath2 = eventIndexPath
+            popoverController!.textEvent2 = event.textEvent!
             popoverController!.events = event
             break
         default:

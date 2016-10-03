@@ -13,10 +13,17 @@ import CoreData
 
 class TodoTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
+    @IBOutlet weak var todolistLabel: UILabel!
     @IBOutlet weak var printList: UIBarButtonItem!
+    
+    
     //-Global objects, properties & variables
     var events: Events!
+    //var events = [Events]()
+    //var events: [Events]!
+    
     var eventIndexPath2: IndexPath!
+    var headerText: String!
     
     //-Perform when view did load
     override func viewDidLoad() {
@@ -64,6 +71,19 @@ class TodoTableViewController: UITableViewController, NSFetchedResultsController
         
     }
     
+    //-Perform when view did appear
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        //let event = fetchedResultsController.object(at: eventIndexPath2)
+        print(self.headerText)
+        
+        let formattedString = NSMutableAttributedString()
+        _ = formattedString.bold(text: self.headerText!).normal(text: "\n").normal(text: String(events.todoList.count)).normal(text: " Items")
+        todolistLabel.attributedText = formattedString
+
+    }
+    
     
     //-Reset the Table Edit view when the view disappears
     override func viewWillDisappear(_ animated: Bool) {
@@ -98,6 +118,7 @@ class TodoTableViewController: UITableViewController, NSFetchedResultsController
         
         let fetchRequest = NSFetchRequest<TodoList>(entityName: "TodoList")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "todoListText", ascending: true)]
+        //fetchRequest.sortDescriptors = [NSSortDescriptor()]
                 fetchRequest.predicate = NSPredicate(format: "events == %@", self.events);
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
             managedObjectContext: self.sharedContext,
@@ -206,7 +227,7 @@ class TodoTableViewController: UITableViewController, NSFetchedResultsController
         
         let detailViewController = segue.source as! TodoEditTableViewController
         
-        let todos = fetchedResultsController.object(at: tableView.indexPathForSelectedRow!) 
+        let todos = fetchedResultsController.object(at: tableView.indexPathForSelectedRow!)
         todos.todoListText = detailViewController.editedModel!
         self.sharedContext.refresh(todos, mergeChanges: true)
         
@@ -263,21 +284,37 @@ class TodoTableViewController: UITableViewController, NSFetchedResultsController
         
     }
     
+    
+//    func drawHeaderForPage(at pageIndex: Int, in headerRect: CGRect) {
+//        if self.headerText != nil {
+//            var font = UIFont(name: "Helvetica", size: 20.0)
+//            var size = self.headerText
+//            // Center Text
+//            var drawX: CGFloat = CGRectGetMaxX(headerRect) / 2 - size.width / 2.0
+//            var drawY: CGFloat = CGRectGetMaxY(headerRect) - size.height - 2.0
+//            var drawPoint = CGPoint(x: drawX, y: drawY)
+//            self.headerText.draw(at: drawPoint, withAttributes: [String : Any]?)
+//        }
+//    }
+    
+    
     //-Print the To Do List
     @IBAction func printList(_ sender: UIBarButtonItem) {
         
         //-Take a snapshot of the screen
-        let rect: CGRect = view.bounds
-        UIGraphicsBeginImageContextWithOptions(rect.size, true, 0.0)
-        let context: CGContext = UIGraphicsGetCurrentContext()!
-        view.layer.render(in: context)
-        let capturedScreen: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext()
-        let printImage: UIImage = UIImage(cgImage: capturedScreen.cgImage!, scale: 1.0, orientation: .up)
         
-        //if UIPrintInteractionController.canPrintURL(imageURL) {
+        self.navigationController!.setToolbarHidden(true, animated: true)
+        self.navigationController!.setNavigationBarHidden(true, animated: true)
+        
+        let layer = UIApplication.shared.keyWindow!.layer
+        let scale = UIScreen.main.scale
+        UIGraphicsBeginImageContextWithOptions(layer.frame.size, false, scale);
+        layer.render(in: UIGraphicsGetCurrentContext()!)
+        let screenshot = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        let printImage: UIImage = UIImage(cgImage: screenshot!.cgImage!, scale: 1.0, orientation: .up)
         let printInfo = UIPrintInfo(dictionary: nil)
-        //printInfo.jobName = imageURL.lastPathComponent
         printInfo.outputType = .general
         let printController = UIPrintInteractionController.shared
         printController.printInfo = printInfo
@@ -286,8 +323,30 @@ class TodoTableViewController: UITableViewController, NSFetchedResultsController
         printController.printingItem = printImage
         
         printController.present(animated: true, completionHandler: nil)
+        
+        self.navigationController!.setToolbarHidden(false, animated: true)
+        self.navigationController!.setNavigationBarHidden(false, animated: true)
+        
+        
         //}
     }
     
 }
+
+//-Bold and Normal Text Creation Shared Function
+extension NSMutableAttributedString {
+    func bold(text:String) -> NSMutableAttributedString {
+        let attrs:[String:AnyObject] = [NSFontAttributeName : UIFont(name: "Helvetica-Bold", size: 17)!]
+        let boldString = NSMutableAttributedString(string:"\(text)", attributes:attrs)
+        self.append(boldString)
+        return self
+    }
+    
+    func normal(text:String)->NSMutableAttributedString {
+        let normal =  NSAttributedString(string: text)
+        self.append(normal)
+        return self
+    }
+}
+
 

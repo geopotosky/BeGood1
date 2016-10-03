@@ -11,7 +11,7 @@ import UIKit
 import CoreData
 
 
-class BeGoodCollectionViewController: UIViewController, UICollectionViewDataSource, NSFetchedResultsControllerDelegate {
+class BeGoodCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, NSFetchedResultsControllerDelegate {
     
     //-View Outlets
     @IBOutlet weak var collectionView: UICollectionView!
@@ -196,7 +196,7 @@ class BeGoodCollectionViewController: UIViewController, UICollectionViewDataSour
         return sectionInfo.numberOfObjects
     }
     
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BeGoodCollectionViewCell", for: indexPath) as! BeGoodCollectionViewCell
@@ -207,7 +207,8 @@ class BeGoodCollectionViewController: UIViewController, UICollectionViewDataSour
     }
     
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: IndexPath) {
+    //-If a collection entry is selected, pull up the Event Details page
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         if editButtonFlag == false {
             

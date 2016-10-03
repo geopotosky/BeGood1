@@ -11,7 +11,7 @@ import CoreData
 import EventKit
 
 
-class BeGoodTableViewController: UIViewController, UITableViewDataSource, NSFetchedResultsControllerDelegate {
+class BeGoodTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate {
     
     //-View Outlets
     @IBOutlet weak var tableView: UITableView!
@@ -185,11 +185,8 @@ class BeGoodTableViewController: UIViewController, UITableViewDataSource, NSFetc
     
     
     //-If a table entry is selected, pull up the Event Details page
-    func tableView(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-    //func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-
         let controller =
         storyboard!.instantiateViewController(withIdentifier: "BeGoodShowViewController") as! BeGoodShowViewController
 

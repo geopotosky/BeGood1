@@ -27,6 +27,7 @@ class BeGoodPopoverViewController: UITableViewController, UIPopoverPresentationC
     //-Global objects, properties & variables
     var events: Events!
     var eventIndexPath2: IndexPath!
+    var textEvent2: String!
     
     //-Info Alert variables
     var infoMessage: String!
@@ -98,6 +99,8 @@ class BeGoodPopoverViewController: UITableViewController, UIPopoverPresentationC
             
             controller.eventIndexPath2 = eventIndexPath2
             controller.events = event
+            controller.headerText = self.textEvent2!
+            print("First Header:", self.textEvent2!)
             
             let navController = UINavigationController(rootViewController: controller)
             navController.modalPresentationStyle = UIModalPresentationStyle.formSheet
@@ -126,7 +129,7 @@ class BeGoodPopoverViewController: UITableViewController, UIPopoverPresentationC
             
             //-Call the Info Alert message
             self.infoTitle = "About Be Good To Yourself"
-            self.infoMessage = "Version 1\r\r Be Good To Yourself” is an event tracker and countdown App. Users can add as many events as they want. Events are automatically saved after they are created/edited.  The app includes the ability to fully customize the event view, create To Do lists and budget sheets for each event. Users can add their event to their local calendar and share them with social media apps.\r\r Copyright(c) 2016 GeoWorld. All rights reserved."
+            self.infoMessage = "Version 1.0\r\r Be Good To Yourself” is an event tracker and countdown App. Users can add as many events as they want. Events are automatically saved after they are created/edited.  The app includes the ability to fully customize the event view, create To Do lists and budget sheets for each event. Users can add their event to their local calendar and share them with social media apps.\r\r Copyright(c) 2016 GeoWorld. All rights reserved."
             self.InfoAlertMessage()
         }
         

@@ -19,15 +19,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        //-Add Splash screen delay
-        Thread.sleep(forTimeInterval: 2)
-        
         //-Notification settings
         application.registerUserNotificationSettings(UIUserNotificationSettings(types: .alert, categories: nil))
         application.registerUserNotificationSettings(UIUserNotificationSettings(types: .badge, categories: nil))
         application.registerUserNotificationSettings(UIUserNotificationSettings(types: .sound, categories: nil))
         
         return true
+        
+//        //Check if its first time
+//        if !(UserDefaults.standard.object(forKey: "is_first_time") != nil) {
+//            application.cancelAllLocalNotifications()
+//            // Restart the Local Notifications list
+//            UserDefaults.standard.set(Int(true), forKey: "is_first_time")
+//            
+//            //-Add Splash screen delay
+//            Thread.sleep(forTimeInterval: 2)
+//            
+//            //-Notification settings
+//            application.registerUserNotificationSettings(UIUserNotificationSettings(types: .alert, categories: nil))
+//            application.registerUserNotificationSettings(UIUserNotificationSettings(types: .badge, categories: nil))
+//            application.registerUserNotificationSettings(UIUserNotificationSettings(types: .sound, categories: nil))
+//            return true
+//            
+//        } else {
+//        //return true
+//        
+//        
+//        //-Add Splash screen delay
+//        Thread.sleep(forTimeInterval: 2)
+//        
+//        //-Notification settings
+//        application.registerUserNotificationSettings(UIUserNotificationSettings(types: .alert, categories: nil))
+//        application.registerUserNotificationSettings(UIUserNotificationSettings(types: .badge, categories: nil))
+//        application.registerUserNotificationSettings(UIUserNotificationSettings(types: .sound, categories: nil))
+//        
+//        return true
+//        }
     }
 
     func application(_ application: UIApplication, didReceive notification: UILocalNotification) {

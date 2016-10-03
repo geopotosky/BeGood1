@@ -103,9 +103,14 @@ class BudgetTableViewController: UITableViewController, NSFetchedResultsControll
             }
             index += 1
         }
-        let totals: String = "Budget:"
+
+        let totals: String = "\nBudget:"
         let yourBudgetTotal = String.localizedStringWithFormat("%@ $%.2f", totals, finalValue)
-        totalLabel.text = yourBudgetTotal
+        let formattedString = NSMutableAttributedString()
+        _ = formattedString.bold(text: events.textEvent!).normal(text: yourBudgetTotal)
+        totalLabel.attributedText = formattedString
+        
+        
     }
     
     
@@ -194,9 +199,11 @@ class BudgetTableViewController: UITableViewController, NSFetchedResultsControll
                     }
                     index += 1
                 }
-                let totals: String = "Budget:"
+                let totals: String = "\nBudget:"
                 let yourBudgetTotal = String.localizedStringWithFormat("%@ $%.2f", totals, finalValue)
-                totalLabel.text = yourBudgetTotal
+                let formattedString = NSMutableAttributedString()
+                _ = formattedString.bold(text: events.textEvent!).normal(text: yourBudgetTotal)
+                totalLabel.attributedText = formattedString
                 
                 
             default:
@@ -331,17 +338,18 @@ class BudgetTableViewController: UITableViewController, NSFetchedResultsControll
     @IBAction func printList(_ sender: UIBarButtonItem) {
 
         //-Take a snapshot of the screen
-        let rect: CGRect = view.bounds
-        UIGraphicsBeginImageContextWithOptions(rect.size, true, 0.0)
-        let context: CGContext = UIGraphicsGetCurrentContext()!
-        view.layer.render(in: context)
-        let capturedScreen: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext()
-        let printImage: UIImage = UIImage(cgImage: capturedScreen.cgImage!, scale: 1.0, orientation: .up)
+        self.navigationController!.setToolbarHidden(true, animated: true)
+        self.navigationController!.setNavigationBarHidden(true, animated: true)
         
-        //if UIPrintInteractionController.canPrintURL(imageURL) {
+        let layer = UIApplication.shared.keyWindow!.layer
+        let scale = UIScreen.main.scale
+        UIGraphicsBeginImageContextWithOptions(layer.frame.size, false, scale);
+        layer.render(in: UIGraphicsGetCurrentContext()!)
+        let screenshot = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        let printImage: UIImage = UIImage(cgImage: screenshot!.cgImage!, scale: 1.0, orientation: .up)
         let printInfo = UIPrintInfo(dictionary: nil)
-        //printInfo.jobName = imageURL.lastPathComponent
         printInfo.outputType = .general
         let printController = UIPrintInteractionController.shared
         printController.printInfo = printInfo
@@ -350,9 +358,28 @@ class BudgetTableViewController: UITableViewController, NSFetchedResultsControll
         printController.printingItem = printImage
         
         printController.present(animated: true, completionHandler: nil)
-        //}
+        
+        self.navigationController!.setToolbarHidden(false, animated: true)
+        self.navigationController!.setNavigationBarHidden(false, animated: true)
+
     }
-    
-    
 }
+
+////-Bold and Normal Text Creation Function
+//extension NSMutableAttributedString {
+//    func bold(text:String) -> NSMutableAttributedString {
+//        let attrs:[String:AnyObject] = [NSFontAttributeName : UIFont(name: "Helvetica-Bold", size: 17)!]
+//        let boldString = NSMutableAttributedString(string:"\(text)", attributes:attrs)
+//        self.append(boldString)
+//        return self
+//    }
+//    
+//    func normal(text:String)->NSMutableAttributedString {
+//        let normal =  NSAttributedString(string: text)
+//        self.append(normal)
+//        return self
+//    }
+//}
+
+
 
