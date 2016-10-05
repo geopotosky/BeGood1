@@ -12,7 +12,7 @@ import CoreData
 import EventKit
 
 
-class BeGoodShowViewController : UIViewController, NSFetchedResultsControllerDelegate {
+class BeGoodShowViewController : UIViewController, NSFetchedResultsControllerDelegate, UIGestureRecognizerDelegate {
     
     //-View Outlets
     @IBOutlet weak var imageView: UIImageView!
@@ -232,7 +232,14 @@ class BeGoodShowViewController : UIViewController, NSFetchedResultsControllerDel
         return fetchedResultsController
         
     }()
-        
+
+    
+    @IBAction func longPressButton(_ sender: AnyObject) {
+        //-Call Alert message
+        self.alertTitle = "Magic Wand TIP"
+        self.alertMessage = "Turn on the Magic Wand to remove 2 days from the display counter."
+        self.calendarAlertMessage()
+    }
     
     //-Set the "until" dynamic text based on segment selection
     @IBAction func segmentPicked(_ sender: UISegmentedControl) {
@@ -548,7 +555,7 @@ class BeGoodShowViewController : UIViewController, NSFetchedResultsControllerDel
             let popoverController = (segue.destination as? BeGoodPopoverViewController)
             let event = fetchedResultsController.object(at: eventIndexPath)
             popoverController!.eventIndexPath2 = eventIndexPath
-            popoverController!.textEvent2 = event.textEvent!
+            popoverController!.headerText = event.textEvent!
             popoverController!.events = event
             break
         default:
@@ -679,7 +686,7 @@ extension BeGoodShowViewController {
                 self.calendarAlertMessage()
             } catch {
                 //-Call Alert message
-                self.alertTitle = "NOTICE"
+                self.alertTitle = "ALERT"
                 self.alertMessage = "One of your Calendars may be restricted. Please check to see if the Calendar event is added or allow access to add events."
                 self.calendarAlertMessage()
             }

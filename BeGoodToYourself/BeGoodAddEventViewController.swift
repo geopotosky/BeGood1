@@ -24,7 +24,6 @@ class BeGoodAddEventViewController: UIViewController, UIImagePickerControllerDel
     @IBOutlet weak var toolbarObject: UIToolbar!
     @IBOutlet weak var adjustImageLabel: UILabel!
     @IBOutlet weak var tempImage: UIImageView!
-
     
     //-Set the textfield delegates
     let eventTextDelegate = EventTextDelegate()
@@ -42,14 +41,14 @@ class BeGoodAddEventViewController: UIViewController, UIImagePickerControllerDel
     var calendarID: String!
     var changedEventImage: UIImage!
     //var section: Int!
-    var eventItemCounter: Int!
+    //var eventItemCounter: Int!
     
 
     
     //-Alert variable
     var alertMessage: String!
     
-    //-Disney image based on flag (0-no pic, 1-library, 2-camera, 3-Flickr)
+    //-Display image based on imageFlag value (0-no pic, 1-photo library, 2-camera photo, 3-Flickr Image)
     var imageFlag: Int! = 0
     
     var tapRecognizer: UITapGestureRecognizer? = nil
@@ -69,13 +68,13 @@ class BeGoodAddEventViewController: UIViewController, UIImagePickerControllerDel
         //-Enable SAVE button if editing existing Event
         //-Hide Adjust Image Text if Creating new Event
         //-View Adjust Image Text if editing existig Event
-        if editEventFlag == true {
-            self.navigationItem.rightBarButtonItem?.isEnabled = true
-            self.adjustImageLabel.isHidden = false
-        } else {
-            self.navigationItem.rightBarButtonItem?.isEnabled = false
-            self.adjustImageLabel.isHidden = true
-        }
+//        if editEventFlag == true {
+//            self.navigationItem.rightBarButtonItem?.isEnabled = true
+//            self.adjustImageLabel.isHidden = false
+//        } else {
+//            self.navigationItem.rightBarButtonItem?.isEnabled = false
+//            self.adjustImageLabel.isHidden = true
+//        }
         
         //-Hide the Tab Bar
         self.tabBarController?.tabBar.isHidden = true
@@ -125,7 +124,7 @@ class BeGoodAddEventViewController: UIViewController, UIImagePickerControllerDel
         //-Textfield delegate values
         self.textFieldEvent.delegate = eventTextDelegate
         
-        
+        //-fetch saved event data
         do {
             try fetchedResultsController.performFetch()
         } catch _ {
@@ -134,16 +133,27 @@ class BeGoodAddEventViewController: UIViewController, UIImagePickerControllerDel
         //-Set the view controller as the delegate
         fetchedResultsController.delegate = self
         
+        
         //-Set Values Based on New or Existing Event
+        //-Disable SAVE button if creating new Event
+        //-Enable SAVE button if editing existing Event
+        //-Hide Adjust Image Text if Creating new Event
+        //-View Adjust Image Text if editing existig Event
+        
         if editEventFlag == false {
             //-Load default values for new event
             //tempImage.isHidden = false
+            tempImage.isHidden = false
             currentEventDate = Date()
+            self.navigationItem.rightBarButtonItem?.isEnabled = false
+            self.adjustImageLabel.isHidden = true
             
-            
+        //editEventFlag is set to true
         } else {
+            //-Load values for existing event
             tempImage.isHidden = true
-            //print(tempImage.isHidden)
+            self.navigationItem.rightBarButtonItem?.isEnabled = true
+            self.adjustImageLabel.isHidden = false
             let event = fetchedResultsController.object(at: eventIndexPath2) 
             
             //-Add Selected Meme attributes and populate Editor fields
@@ -178,10 +188,10 @@ class BeGoodAddEventViewController: UIViewController, UIImagePickerControllerDel
             self.navigationItem.rightBarButtonItem?.isEnabled = true
             self.adjustImageLabel.isHidden = false
             self.imageViewPicker.image = flickrImage
-            //self.tempImage.isHidden = true
+            tempImage.isHidden = true
             
         } else {
-            //self.tempImage.isHidden = false
+            //tempImage.isHidden = false
         }
         
         let dateFormatter = DateFormatter()
@@ -243,10 +253,10 @@ class BeGoodAddEventViewController: UIViewController, UIImagePickerControllerDel
     //-Scrolling an Image Movements
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         
-        //self.adjustImageLabel.hidden = true
+        //self.adjustImageLabel.isHidden = true
         return self.imageViewPicker
     }
-
+    
     
     //-Pick Event Date
     @IBAction func pickEventDate(_ sender: UIButton) {
@@ -273,9 +283,11 @@ class BeGoodAddEventViewController: UIViewController, UIImagePickerControllerDel
         didFinishPickingMediaWithInfo info: [String : Any]){
             
             if let eventImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+                imageFlag = 1
                 self.imageViewPicker.image = eventImage
                 self.adjustImageLabel.isHidden = false
-                self.tempImage.isHidden = true
+                tempImage.isHidden = true
+                print(tempImage.isHidden)
                 
                 //-Reset the ScrollView to original scale
                 self.scrollView.zoomScale = 1.0
@@ -315,7 +327,7 @@ class BeGoodAddEventViewController: UIViewController, UIImagePickerControllerDel
         let controller = self.storyboard?.instantiateViewController(withIdentifier: "BeGoodFlickrViewController") as! BeGoodFlickrViewController
         controller.editEventFlag2 = editEventFlag
         controller.eventIndexPath2 = self.eventIndexPath2
-        controller.currentImage = imageViewPicker.image
+        controller.currentImage = self.imageViewPicker.image
         self.navigationController!.pushViewController(controller, animated: true)
     }
     
@@ -379,8 +391,6 @@ class BeGoodAddEventViewController: UIViewController, UIImagePickerControllerDel
         //-Verify Selected Date is greater than current date before saving
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy/MM/dd hh:mm:ss a"
-        //print(dateFormatter.string(from: self.currentEventDate))
-        //print(dateFormatter.string(from: Date()))
         
         //-If the edit event flag is set to true, save a existing event
         if editEventFlag == true {
@@ -552,12 +562,15 @@ class BeGoodAddEventViewController: UIViewController, UIImagePickerControllerDel
                     
                     //-Prevent dupicates Event Names
                     do {
+                    //-Save original event title in temporary object
+                    let newEventTitle: String! = String(event.textEvent!)
+                    //-Pull the objects to look for duplicates
                     let fetchRequest = NSFetchRequest<Events>(entityName: "Events")
                     fetchRequest.predicate = NSPredicate(format: "textEvent == %@", textFieldEvent.text!);
                     let result = try self.sharedContext.fetch(fetchRequest)
                         print(fetchRequest.predicate)
                         print(result.count)
-                        if result.count == 1 {
+                        if result.count == 1 && textFieldEvent.text! != newEventTitle{
                             print("Duplicate found")
                             self.alertMessage = "Duplicate Event Title Found. Use a unique Event Title."
                             self.textAlertMessage()
@@ -569,6 +582,26 @@ class BeGoodAddEventViewController: UIViewController, UIImagePickerControllerDel
                             event.textCalendarID = calendarID
                             self.sharedContext.refresh(event, mergeChanges: true)
                             CoreDataStackManager.sharedInstance().saveContext()
+                            
+                            //-Create a corresponding local notification
+                            dateFormatter.dateFormat = "MMM dd 'at' h:mm a" // example: "Jan 01 at 12:00 PM"
+                            
+                            let notification = UILocalNotification()
+                            notification.alertBody = "Event \(textFieldEvent.text!) - on \"\(dateFormatter.string(from: self.currentEventDate))\" is Overdue" // text that will be displayed in the notification
+                            notification.alertAction = "open" // text that is displayed after "slide to..." on the lock screen - defaults to "slide to view"
+                            notification.fireDate = self.currentEventDate // Event item due date (when notification will be fired)
+                            notification.soundName = UILocalNotificationDefaultSoundName // play default sound
+                            notification.userInfo = ["UUID": String(describing: self.currentEventDate)]
+                            UIApplication.shared.scheduleLocalNotification(notification)
+                            
+                            
+                            //-Pass event index info to Show scene
+                            let controller = self.navigationController!.viewControllers[1] as! BeGoodShowViewController
+                            controller.editEventFlag = true
+                            controller.eventIndexPath = self.eventIndexPath2
+                            controller.eventIndex = self.eventIndex2
+                            
+                            self.navigationController!.popViewController(animated: true)
                         }
                     }
                     catch {
@@ -643,25 +676,25 @@ class BeGoodAddEventViewController: UIViewController, UIImagePickerControllerDel
                     
 //                CoreDataStackManager.sharedInstance().saveContext()
                 
-                //-Create a corresponding local notification
-                dateFormatter.dateFormat = "MMM dd 'at' h:mm a" // example: "Jan 01 at 12:00 PM"
-
-                let notification = UILocalNotification()
-                notification.alertBody = "Event \(textFieldEvent.text!) - on \"\(dateFormatter.string(from: self.currentEventDate))\" is Overdue" // text that will be displayed in the notification
-                notification.alertAction = "open" // text that is displayed after "slide to..." on the lock screen - defaults to "slide to view"
-                notification.fireDate = self.currentEventDate // Event item due date (when notification will be fired)
-                notification.soundName = UILocalNotificationDefaultSoundName // play default sound
-                notification.userInfo = ["UUID": String(describing: self.currentEventDate)]
-                UIApplication.shared.scheduleLocalNotification(notification)
-                
-            
-                //-Pass event index info to Show scene
-                let controller = self.navigationController!.viewControllers[1] as! BeGoodShowViewController
-                controller.editEventFlag = true
-                controller.eventIndexPath = self.eventIndexPath2
-                controller.eventIndex = self.eventIndex2
-                    
-                self.navigationController!.popViewController(animated: true)
+//                //-Create a corresponding local notification
+//                dateFormatter.dateFormat = "MMM dd 'at' h:mm a" // example: "Jan 01 at 12:00 PM"
+//
+//                let notification = UILocalNotification()
+//                notification.alertBody = "Event \(textFieldEvent.text!) - on \"\(dateFormatter.string(from: self.currentEventDate))\" is Overdue" // text that will be displayed in the notification
+//                notification.alertAction = "open" // text that is displayed after "slide to..." on the lock screen - defaults to "slide to view"
+//                notification.fireDate = self.currentEventDate // Event item due date (when notification will be fired)
+//                notification.soundName = UILocalNotificationDefaultSoundName // play default sound
+//                notification.userInfo = ["UUID": String(describing: self.currentEventDate)]
+//                UIApplication.shared.scheduleLocalNotification(notification)
+//                
+//            
+//                //-Pass event index info to Show scene
+//                let controller = self.navigationController!.viewControllers[1] as! BeGoodShowViewController
+//                controller.editEventFlag = true
+//                controller.eventIndexPath = self.eventIndexPath2
+//                controller.eventIndex = self.eventIndex2
+//                    
+//                self.navigationController!.popViewController(animated: true)
             }
             
         //-If the edit event flag is set to false, save a new event
@@ -680,6 +713,7 @@ class BeGoodAddEventViewController: UIViewController, UIImagePickerControllerDel
                 
                     //-Prevent dupicates Event Names
                     do {
+                        //-Pull the objects to look for duplicates
                         let fetchRequest = NSFetchRequest<Events>(entityName: "Events")
                         fetchRequest.predicate = NSPredicate(format: "textEvent == %@", textFieldEvent.text!);
                         let result = try self.sharedContext.fetch(fetchRequest)
@@ -747,8 +781,6 @@ class BeGoodAddEventViewController: UIViewController, UIImagePickerControllerDel
             }
     }
     
-
-
     
     //-Alert Message function
     func textAlertMessage(){

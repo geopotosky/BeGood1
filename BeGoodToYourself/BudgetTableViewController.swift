@@ -20,6 +20,7 @@ class BudgetTableViewController: UITableViewController, NSFetchedResultsControll
     //-Global objects, properties & variables
     var events: Events!
     var eventIndexPath2: IndexPath!
+    var headerText: String!
     
     
     //-Perform when view did load
@@ -107,9 +108,8 @@ class BudgetTableViewController: UITableViewController, NSFetchedResultsControll
         let totals: String = "\nBudget:"
         let yourBudgetTotal = String.localizedStringWithFormat("%@ $%.2f", totals, finalValue)
         let formattedString = NSMutableAttributedString()
-        _ = formattedString.bold(text: events.textEvent!).normal(text: yourBudgetTotal)
+        _ = formattedString.bold(text: self.headerText!).normal(text: yourBudgetTotal)
         totalLabel.attributedText = formattedString
-        
         
     }
     

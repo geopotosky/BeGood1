@@ -27,7 +27,7 @@ class BeGoodPopoverViewController: UITableViewController, UIPopoverPresentationC
     //-Global objects, properties & variables
     var events: Events!
     var eventIndexPath2: IndexPath!
-    var textEvent2: String!
+    var headerText: String!
     
     //-Info Alert variables
     var infoMessage: String!
@@ -99,8 +99,7 @@ class BeGoodPopoverViewController: UITableViewController, UIPopoverPresentationC
             
             controller.eventIndexPath2 = eventIndexPath2
             controller.events = event
-            controller.headerText = self.textEvent2!
-            print("First Header:", self.textEvent2!)
+            controller.headerText = self.headerText!
             
             let navController = UINavigationController(rootViewController: controller)
             navController.modalPresentationStyle = UIModalPresentationStyle.formSheet
@@ -113,6 +112,7 @@ class BeGoodPopoverViewController: UITableViewController, UIPopoverPresentationC
             
             controller.eventIndexPath2 = eventIndexPath2
             controller.events = event
+            controller.headerText = self.headerText!
             
             let navController = UINavigationController(rootViewController: controller)
             navController.modalPresentationStyle = UIModalPresentationStyle.formSheet

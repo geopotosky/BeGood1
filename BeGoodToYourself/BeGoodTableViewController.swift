@@ -334,7 +334,7 @@ class BeGoodTableViewController: UIViewController, UITableViewDelegate, UITableV
             //-Present the AlertController
             self.present(actionSheetController, animated: true, completion: nil)
         }
-        //-After 3 second delay, close the Alert automatically
+        //-After 2 second delay, close the Alert automatically
         let delayTime = DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
         DispatchQueue.main.asyncAfter(deadline: delayTime) {
             self.presentedViewController!.dismiss(animated: true, completion: nil);

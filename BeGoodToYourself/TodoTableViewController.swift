@@ -19,8 +19,6 @@ class TodoTableViewController: UITableViewController, NSFetchedResultsController
     
     //-Global objects, properties & variables
     var events: Events!
-    //var events = [Events]()
-    //var events: [Events]!
     
     var eventIndexPath2: IndexPath!
     var headerText: String!
@@ -79,9 +77,12 @@ class TodoTableViewController: UITableViewController, NSFetchedResultsController
         print(self.headerText)
         
         let formattedString = NSMutableAttributedString()
-        _ = formattedString.bold(text: self.headerText!).normal(text: "\n").normal(text: String(events.todoList.count)).normal(text: " Items")
+        if events.todoList.count == 1 {
+            _ = formattedString.bold(text: self.headerText!).normal(text: "\n").normal(text: String(events.todoList.count)).normal(text: " Item")
+        } else {
+            _ = formattedString.bold(text: self.headerText!).normal(text: "\n").normal(text: String(events.todoList.count)).normal(text: " Items")
+        }
         todolistLabel.attributedText = formattedString
-
     }
     
     
@@ -95,6 +96,16 @@ class TodoTableViewController: UITableViewController, NSFetchedResultsController
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         self.tableView.setEditing(editing, animated: animated)
+        
+        //-Reset the Header count
+        let formattedString = NSMutableAttributedString()
+        if events.todoList.count == 1 {
+            _ = formattedString.bold(text: self.headerText!).normal(text: "\n").normal(text: String(events.todoList.count)).normal(text: " Item")
+        } else {
+            _ = formattedString.bold(text: self.headerText!).normal(text: "\n").normal(text: String(events.todoList.count)).normal(text: " Items")
+        }
+        todolistLabel.attributedText = formattedString
+        
     }
     
     

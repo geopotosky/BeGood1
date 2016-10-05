@@ -68,8 +68,8 @@ class BeGoodFlickrViewController: UIViewController, UISearchBarDelegate {
         self.addKeyboardDismissRecognizer()
         
         //-Display the current or default event image
-        if editEventFlag2 == false {
-            self.tempImage.isHidden = false
+        if editEventFlag2 == false && self.photoImageView.image == nil {
+            //self.tempImage.isHidden = false
         } else {
             self.tempImage.isHidden = true
             self.photoImageView.image = currentImage
