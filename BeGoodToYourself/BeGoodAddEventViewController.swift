@@ -64,18 +64,6 @@ class BeGoodAddEventViewController: UIViewController, UIImagePickerControllerDel
         //-Create Navbar Buttons
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.save, target: self, action: #selector(BeGoodAddEventViewController.saveEvent))
         
-        //-Disable SAVE button if creating new Event
-        //-Enable SAVE button if editing existing Event
-        //-Hide Adjust Image Text if Creating new Event
-        //-View Adjust Image Text if editing existig Event
-//        if editEventFlag == true {
-//            self.navigationItem.rightBarButtonItem?.isEnabled = true
-//            self.adjustImageLabel.isHidden = false
-//        } else {
-//            self.navigationItem.rightBarButtonItem?.isEnabled = false
-//            self.adjustImageLabel.isHidden = true
-//        }
-        
         //-Hide the Tab Bar
         self.tabBarController?.tabBar.isHidden = true
         
@@ -83,7 +71,7 @@ class BeGoodAddEventViewController: UIViewController, UIImagePickerControllerDel
         //-ScrollView Min and Max settings
         self.scrollView.minimumZoomScale = 1.0
         self.scrollView.maximumZoomScale = 3.0
-        
+
 
         //-Adjust Image Text blur effects
         self.adjustImageLabel.textAlignment = NSTextAlignment.center
@@ -103,7 +91,7 @@ class BeGoodAddEventViewController: UIViewController, UIImagePickerControllerDel
         tapRecognizer?.numberOfTapsRequired = 1
         
         
-        //-Date Picker Formatting ----------------------------------------------------
+        //-Date Picker Formatting -------------------------------------------
         
         let dateFormatter = DateFormatter()
         
@@ -114,7 +102,7 @@ class BeGoodAddEventViewController: UIViewController, UIImagePickerControllerDel
         dateFormatter.timeStyle = DateFormatter.Style.medium //Set time style
         dateFormatter.dateStyle = DateFormatter.Style.medium //Set date style
         
-        //-----------------------------------------------------------------------------
+        //-------------------------------------------------------------------
         
         
         //-Set starting textfield default values
@@ -189,9 +177,6 @@ class BeGoodAddEventViewController: UIViewController, UIImagePickerControllerDel
             self.adjustImageLabel.isHidden = false
             self.imageViewPicker.image = flickrImage
             tempImage.isHidden = true
-            
-        } else {
-            //tempImage.isHidden = false
         }
         
         let dateFormatter = DateFormatter()
@@ -202,13 +187,21 @@ class BeGoodAddEventViewController: UIViewController, UIImagePickerControllerDel
         if currentEventDate != nil {
             let strDate = dateFormatter.string(from: currentEventDate)
             datePickerLable.text = strDate
-            
         }
         
         //-Disable the CAMERA if you are using a simulator without a camera
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)
         
     }
+    
+    
+    //-Scrolling an Image Movements
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        
+        //self.adjustImageLabel.isHidden = true
+        return self.imageViewPicker
+    }
+    
     
     //-Perform when view disappears
     override func viewWillDisappear(_ animated: Bool) {
@@ -224,16 +217,7 @@ class BeGoodAddEventViewController: UIViewController, UIImagePickerControllerDel
     lazy var sharedContext: NSManagedObjectContext = {
         return CoreDataStackManager.sharedInstance().managedObjectContext!
         }()
-    
-    
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        let sectionInfo = self.fetchedResultsController.sections![section]
-//        eventItemCounter = sectionInfo.numberOfObjects
-//        print(eventItemCounter)
-//        return sectionInfo.numberOfObjects
-//        
-//    }
-    
+
     
     //-Fetched Results Controller
     lazy var fetchedResultsController: NSFetchedResultsController<Events> = {
@@ -250,13 +234,6 @@ class BeGoodAddEventViewController: UIViewController, UIImagePickerControllerDel
         
     }()
 
-    //-Scrolling an Image Movements
-    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-        
-        //self.adjustImageLabel.isHidden = true
-        return self.imageViewPicker
-    }
-    
     
     //-Pick Event Date
     @IBAction func pickEventDate(_ sender: UIButton) {
@@ -287,22 +264,31 @@ class BeGoodAddEventViewController: UIViewController, UIImagePickerControllerDel
                 self.imageViewPicker.image = eventImage
                 self.adjustImageLabel.isHidden = false
                 tempImage.isHidden = true
-                print(tempImage.isHidden)
                 
                 //-Reset the ScrollView to original scale
                 self.scrollView.zoomScale = 1.0
                 
+                //self.scrollView.contentSize = self.imageViewPicker.image!.size
+                //self.imageViewPicker.frame = CGRect(x: 0, y: 0, width: self.imageViewPicker.image!.size.width, height: self.imageViewPicker.image!.size.height)
+                //self.imageViewPicker.contentMode = .scaleAspectFill
+                
+                //self.imageViewPicker.translatesAutoresizingMaskIntoConstraints = true
+                //self.scrollView.contentOffset = CGPointZero
+                //self.scrollView.contentSize = (imageViewPicker.image?.size)!
+                
+//                _imageView.translatesAutoresizingMaskIntoConstraints = YES;
+//                
+//                _scrollView.contentOffset = CGPointZero;
+//                _scrollView.contentSize = _imageView.image.size;
                 
             }
         
             //-Enable the Right Navbar Button
             self.navigationItem.rightBarButtonItem?.isEnabled = true
-        
             self.dismiss(animated: true, completion: nil)
         
     }
 
-    
     
     //-Cancel the picked image
     func imagePickerControllerDidCancel(_ imagePicker: UIImagePickerController){
@@ -353,7 +339,7 @@ class BeGoodAddEventViewController: UIViewController, UIImagePickerControllerDel
     //-Create the adjusted Event Image
     func createSnapshotOfView() -> UIImage {
         
-        //-Hide toolbar
+        //-Hide screen objects
         toolbarObject.isHidden = true
         self.navigationController!.navigationBar.isHidden = true
         datePickerLable.isHidden = true
@@ -361,6 +347,7 @@ class BeGoodAddEventViewController: UIViewController, UIImagePickerControllerDel
         textFieldEvent.isHidden = true
         adjustImageLabel.isHidden = true
         
+        //-Capture the screen
         let rect: CGRect = view.bounds
         UIGraphicsBeginImageContextWithOptions(rect.size, true, 0.0)
         let context: CGContext = UIGraphicsGetCurrentContext()!
@@ -369,7 +356,7 @@ class BeGoodAddEventViewController: UIViewController, UIImagePickerControllerDel
         UIGraphicsEndImageContext()
         let shareEventImage: UIImage = UIImage(cgImage: capturedScreen.cgImage!, scale: 1.0, orientation: .up)
         
-        //-UnHide toolbar
+        //-UnHide screen objects
         toolbarObject.isHidden = false
         self.navigationController!.navigationBar.isHidden = false
         datePickerLable.isHidden = false
@@ -401,7 +388,6 @@ class BeGoodAddEventViewController: UIViewController, UIImagePickerControllerDel
                 
             } else
                 //-Verify Selected Date is greater than current date before saving
-                
                 if dateFormatter.string(from: self.currentEventDate) <= dateFormatter.string(from: Date()){
                     self.alertMessage = "Please Verify the Event Date is Greater Than the Current Date"
                     self.textAlertMessage()
@@ -438,127 +424,6 @@ class BeGoodAddEventViewController: UIViewController, UIImagePickerControllerDel
                         }
                     }
                 }
-                //- Do nothing if no events are found for deletion
-                
-                    
-                //-Update selected event
-//                event.eventDate = self.currentEventDate
-//                event.textEvent = textFieldEvent.text!
-//                    print("textEvent:", textFieldEvent.text!)
-//                    
-//                event.eventImage = eventImage
-//                event.textCalendarID = calendarID
-                    
-                    
-                    
-//                    if #available(iOS 8.3, *) {
-//                        self.sharedContext.refreshAllObjects()
-//                    } else {
-//                        // Fallback on earlier versions
-//                    }
-                //self.sharedContext.refresh(event, mergeChanges: true)
-//                    do {
-//                        try self.sharedContext.save()
-//                    } catch {
-//                        // Do something in response to error condition
-//                    }
-                    
-                    
-//                    let predicate = NSPredicate(format: "events == %@", self.events)
-//                    
-//                    let fetchRequest = NSFetchRequest<Events>(entityName: "Events")
-//                    fetchRequest.predicate = predicate
-//                    
-//                    do {
-//                        //let fetchedEntities = try self.sharedContext.executeFetchRequest(fetchRequest) as! [MyEntity]
-//                        let fetchedEntities = try self.sharedContext.execute(fetchRequest)
-//                        fetchedEntities.first?.FirstPropertyToUpdate = NewValue
-//                        fetchedEntities.first?.SecondPropertyToUpdate = NewValue
-//                        // ... Update additional properties with new value
-//
-//                    } catch {
-//                        // Do something in response to error condition
-//                    }
-//                    
-//                    do {
-//                        try self.sharedContext.save()
-//                    } catch {
-//                        // Do something in response to error condition
-//                    }
-                    
-                    
-                    
-//                    let fetchRequest = NSFetchRequest<Events>(entityName: "Events")
-//                    fetchRequest.sortDescriptors = [NSSortDescriptor(key: "textEvent", ascending: true)]
-//                    fetchRequest.predicate = NSPredicate(format: "textEvents == %@", self.textFieldEvent!);
-//                    //fetchRequest.predicate = predicate
-//                    //var obj = ctx.execute(fetchRequest)
-//                    if (fetchRequest.predicate != self.textFieldEvent) {
-//                        print("No duplicates")
-//                        print(fetchRequest.predicate)
-//                        print(self.textFieldEvent.text!)
-////                        //not there so create it and save
-////                        obj = ctx.insertNewManagedObject(forEntity: "Favorite")
-////                        //typed inline, dont know actual method
-////                        obj.stationIdentifier = stID
-////                        ctx.save()
-//                    }
-//                    //use obj... e.g.
-//                    //print("\(obj.stationIdentifier)")
-                    
-                    
-
-//                    let fetchRequest = NSFetchRequest<Events>(entityName: "Events")
-//                    let result = try self.sharedContext.fetch(fetchRequest) {
-//                        print(result.count)
-//                        if eventItemCounter > 0 {
-//                            var index : Int = 0
-//                            for event in events{
-//                            
-//                                if self.textFieldEvent.text == event.textEvent {
-//                                    print("found duplicate")
-//                                    break;
-//                                }
-//                            
-//                                index += 1
-//                            }
-//                        
-//                        } else {
-//                            print("Could not find any duplicates")
-//                        
-//                        }
-//                    }
-//                    catch {
-//
-//                    }
-                    
-//                    //-GOOD STUFF-------------------
-//                    let tempText: String = "textEvent == \"" + self.textFieldEvent.text! + "\""
-//                    print("Looking for: ", tempText)
-//                    // Initialize Fetch Request
-//                    let fetchRequest = NSFetchRequest<Events>(entityName: "Events")
-//                    //fetchRequest.predicate = NSPredicate(format: "textEvent == %@", textFieldEvent.text!);
-//                    //print(fetchRequest.predicate)
-//                    let result = try self.sharedContext.fetch(fetchRequest){
-//                    print(result.count)
-//                    
-//                    // Create Entity Description
-//                    let entityDescription = NSEntityDescription.entity(forEntityName: "Events", in: self.sharedContext)
-//                    
-//                    // Configure Fetch Request
-//                    fetchRequest.entity = entityDescription
-//                    //print("predicate value:", fetchRequest.predicate!)
-//                    
-//                    //print("comparing predicate:", String(describing: fetchRequest.predicate!))
-//                    print("comparing current textEvent:", tempText)
-//                    
-//                    //if String(describing: fetchRequest.predicate!) == tempText{
-//                    if fetchRequest.predicate != nil{
-//                        print("Found a Duplicate")
-//                    }
-//                    //--------------------------------
-//                    }
-                    
                     
                     //-Prevent dupicates Event Names
                     do {
@@ -572,7 +437,7 @@ class BeGoodAddEventViewController: UIViewController, UIImagePickerControllerDel
                         print(result.count)
                         if result.count == 1 && textFieldEvent.text! != newEventTitle{
                             print("Duplicate found")
-                            self.alertMessage = "Duplicate Event Title Found. Use a unique Event Title."
+                            self.alertMessage = "Duplicate Event Title Found. Enter a unique Event Title."
                             self.textAlertMessage()
                         }
                         else {
@@ -608,93 +473,6 @@ class BeGoodAddEventViewController: UIViewController, UIImagePickerControllerDel
                         self.alertMessage = "No events found. Try again."
                         self.textAlertMessage()
                     }
-
-                    
-                    
-//                    do {
-//                        let fetchRequest = NSFetchRequest<Events>(entityName: "Events")
-//                        let result = try self.sharedContext.fetch(fetchRequest as! NSFetchRequest<NSFetchRequestResult>){
-//                        print(result)
-//                        print(fetchRequest.predicate!)
-//                        
-//                        print(event.textEvent!)
-//                        print(self.textFieldEvent.text!)
-////                        if fetchRequest.predicate! = self.textFieldEvent.text!{
-////                            print("Found a Duplicate")
-////                        }
-//                        
-//                        
-//                        }
-//                        if result.count > 0 {
-//                            var index : Int = 0
-//                            for results in result{
-//                                
-//                                if self.textFieldEvent.text! == event.textEvent! {
-//                                    print("found duplicate")
-//                                    break;
-//                                }
-//                                
-//                                index += 1
-//                            }
-//                                                        
-//                        } else {
-//                            print("Could not find any duplicates")
-//
-//                        }
-//                        print("counter", result.count)
-//                        
-//                    } catch {
-//                        let fetchError = error as NSError
-//                        print(fetchError)
-//                    }
-            
-                    
-//                    //var entity = NSEntityDescription.entity(forName: "Students", inManagedObjectContext: managedObjectContext)!
-//                    let entity = NSEntityDescription.entity(forEntityName: "Events", in: self.sharedContext)
-//                    //let request = NSFetchRequest()
-//                    let request = NSFetchRequest<Events>(entityName: "Events")
-//                    request.entity = entity
-//                    var sortDescriptor = NSSortDescriptor(key: "Events", ascending: false)
-//                    var sortDescriptors = [sortDescriptor]
-//                    request.sortDescriptors = sortDescriptors
-//                    //sortDescriptor.release()
-//                    //NSError * Fetcherror
-//                    let fetchResults = try self.sharedContext.fetch(request)
-//                    if fetchResults.isEmpty {
-//                        print("No Duplicates")
-//                    }
-//                    if (fetchResults.value(forKey: "textEvent") as! String).contains(self.textFieldEvent.text!) {
-//                        //notify duplicates
-//                        return
-//                    }
-//                    else {
-//                        //write your code to add data
-//                    }
-                    
-                    
-                    
-                    
-//                CoreDataStackManager.sharedInstance().saveContext()
-                
-//                //-Create a corresponding local notification
-//                dateFormatter.dateFormat = "MMM dd 'at' h:mm a" // example: "Jan 01 at 12:00 PM"
-//
-//                let notification = UILocalNotification()
-//                notification.alertBody = "Event \(textFieldEvent.text!) - on \"\(dateFormatter.string(from: self.currentEventDate))\" is Overdue" // text that will be displayed in the notification
-//                notification.alertAction = "open" // text that is displayed after "slide to..." on the lock screen - defaults to "slide to view"
-//                notification.fireDate = self.currentEventDate // Event item due date (when notification will be fired)
-//                notification.soundName = UILocalNotificationDefaultSoundName // play default sound
-//                notification.userInfo = ["UUID": String(describing: self.currentEventDate)]
-//                UIApplication.shared.scheduleLocalNotification(notification)
-//                
-//            
-//                //-Pass event index info to Show scene
-//                let controller = self.navigationController!.viewControllers[1] as! BeGoodShowViewController
-//                controller.editEventFlag = true
-//                controller.eventIndexPath = self.eventIndexPath2
-//                controller.eventIndex = self.eventIndex2
-//                    
-//                self.navigationController!.popViewController(animated: true)
             }
             
         //-If the edit event flag is set to false, save a new event
@@ -721,7 +499,7 @@ class BeGoodAddEventViewController: UIViewController, UIImagePickerControllerDel
                         print(result.count)
                         if result.count == 1 {
                             print("Duplicate found")
-                            self.alertMessage = "Duplicate Event Title Found. Use a unique Event Title."
+                            self.alertMessage = "Duplicate Event Title Found. Enter a unique Event Title."
                             self.textAlertMessage()
                         }
                         else {
@@ -752,31 +530,6 @@ class BeGoodAddEventViewController: UIViewController, UIImagePickerControllerDel
                         self.alertMessage = "No events found. Try again."
                         self.textAlertMessage()
                     }
-                    
-                    
-                    
-//                    //-Save new event
-//                    let _ = Events(eventDate: self.currentEventDate, textEvent: textFieldEvent.text!, eventImage: eventImage, textCalendarID: nil, context: sharedContext)
-//            
-//                    //-Save the shared context, using the convenience method in the CoreDataStackManager
-//                    CoreDataStackManager.sharedInstance().saveContext()
-                
-                    
-                    
-//                    //-Create a corresponding local notification
-//                    let dateFormatter = DateFormatter()
-//                    dateFormatter.dateFormat = "MMM dd 'at' h:mm a" // example: "Jan 01 at 12:00 PM"
-//                
-//                    let notification = UILocalNotification()
-//                    notification.alertBody = "Event \(textFieldEvent.text!) - on \"\(dateFormatter.string(from: self.currentEventDate))\" is Overdue" // text that will be displayed in the notification
-//                    notification.alertAction = "open" // text that is displayed after "slide to..." on the lock screen - defaults to "slide to view"
-//                    notification.fireDate = self.currentEventDate // todo item due date (when notification will be fired)
-//                    notification.soundName = UILocalNotificationDefaultSoundName // play default sound
-//                    notification.userInfo = ["UUID": String(describing: self.currentEventDate)]
-//                    UIApplication.shared.scheduleLocalNotification(notification)
-//                
-//            
-//                    self.navigationController!.popViewController(animated: true)
                 }
             }
     }
@@ -791,8 +544,10 @@ class BeGoodAddEventViewController: UIViewController, UIImagePickerControllerDel
             actionSheetController.view.tintColor = UIColor.blue
             let subview = actionSheetController.view.subviews.first! 
             let alertContentView = subview.subviews.first! 
-            alertContentView.backgroundColor = UIColor(red:0.66,green:0.97,blue:0.59,alpha:1.0)
+            //alertContentView.backgroundColor = UIColor(red:0.66,green:0.97,blue:0.59,alpha:1.0)
+            //alertContentView.backgroundColor = UIColor.green
             alertContentView.layer.cornerRadius = 12
+            alertContentView.backgroundColor = UIColor.green
             
             //-Create and add the OK action
             let okAction: UIAlertAction = UIAlertAction(title: "OK", style: .default) { action -> Void in
@@ -830,7 +585,8 @@ extension UIView {
         
         self.addSubview(imageViewBackground)
         self.sendSubview(toBack: imageViewBackground)
-    }}
+    }
+}
 
 
 

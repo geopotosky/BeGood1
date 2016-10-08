@@ -220,9 +220,8 @@ class BeGoodFlickrViewController: UIViewController, UISearchBarDelegate {
             actionSheetController.view.tintColor = UIColor.blue
             let subview = actionSheetController.view.subviews.first! 
             let alertContentView = subview.subviews.first! 
-            //alertContentView.backgroundColor = UIColor(red:0.6,green:1.0,blue:0.6,alpha:1.0)
-            //alertContentView.backgroundColor = UIColor.green
             alertContentView.layer.cornerRadius = 12
+            alertContentView.backgroundColor = UIColor.green
             
             //-Create and add the OK action
             let okAction: UIAlertAction = UIAlertAction(title: "OK", style: .default) { action -> Void in

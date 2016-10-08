@@ -199,6 +199,7 @@ class BudgetTableViewController: UITableViewController, NSFetchedResultsControll
                     }
                     index += 1
                 }
+                //-Create Budget Header
                 let totals: String = "\nBudget:"
                 let yourBudgetTotal = String.localizedStringWithFormat("%@ $%.2f", totals, finalValue)
                 let formattedString = NSMutableAttributedString()
@@ -285,6 +286,7 @@ class BudgetTableViewController: UITableViewController, NSFetchedResultsControll
         tableView.reloadData()
     }
     
+    
     //- Save new Budge sheet data
     @IBAction func saveToTableData(_ segue:UIStoryboardSegue) {
         
@@ -313,7 +315,6 @@ class BudgetTableViewController: UITableViewController, NSFetchedResultsControll
             detailViewController.events = self.events
             detailViewController.budgetIndexPath = path
         }
-        
     }
     
     
@@ -334,13 +335,14 @@ class BudgetTableViewController: UITableViewController, NSFetchedResultsControll
         
     }
     
-    //-Print the To Do List
+    //-Print the Budget List
     @IBAction func printList(_ sender: UIBarButtonItem) {
 
-        //-Take a snapshot of the screen
+        //-Hide navbar and toolbar
         self.navigationController!.setToolbarHidden(true, animated: true)
         self.navigationController!.setNavigationBarHidden(true, animated: true)
         
+        //-Take a snapshot of the screen
         let layer = UIApplication.shared.keyWindow!.layer
         let scale = UIScreen.main.scale
         UIGraphicsBeginImageContextWithOptions(layer.frame.size, false, scale);
@@ -348,38 +350,22 @@ class BudgetTableViewController: UITableViewController, NSFetchedResultsControll
         let screenshot = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
+        //-Printer Setup
         let printImage: UIImage = UIImage(cgImage: screenshot!.cgImage!, scale: 1.0, orientation: .up)
         let printInfo = UIPrintInfo(dictionary: nil)
         printInfo.outputType = .general
         let printController = UIPrintInteractionController.shared
         printController.printInfo = printInfo
         printController.showsNumberOfCopies = true
-        
         printController.printingItem = printImage
-        
         printController.present(animated: true, completionHandler: nil)
         
+        //-Unhide navbar and toolbar
         self.navigationController!.setToolbarHidden(false, animated: true)
         self.navigationController!.setNavigationBarHidden(false, animated: true)
 
     }
 }
-
-////-Bold and Normal Text Creation Function
-//extension NSMutableAttributedString {
-//    func bold(text:String) -> NSMutableAttributedString {
-//        let attrs:[String:AnyObject] = [NSFontAttributeName : UIFont(name: "Helvetica-Bold", size: 17)!]
-//        let boldString = NSMutableAttributedString(string:"\(text)", attributes:attrs)
-//        self.append(boldString)
-//        return self
-//    }
-//    
-//    func normal(text:String)->NSMutableAttributedString {
-//        let normal =  NSAttributedString(string: text)
-//        self.append(normal)
-//        return self
-//    }
-//}
 
 
 

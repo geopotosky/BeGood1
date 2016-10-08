@@ -122,14 +122,14 @@ class BeGoodPopoverViewController: UITableViewController, UIPopoverPresentationC
             
             //-Call the Info Alert message
             self.infoTitle = "What is the Magic Wand?"
-            self.infoMessage = "The Magic Wand method, previously known as the MG Coefficient, is a very unique countdown element not available in any other countdown app. This fun method removes the 1st day of the event counter since the 1st day has already started, and removes the final day of the event counter since the last day can be considered part of the event day. 'Magic Wand OFF' displays the standard countdown values. 'Magic Wand ON' takes 2 days off the event countdown."
+            self.infoMessage = "The Magic Wand method, previously known as the MG Coefficient, is a unique countdown element not available in any other countdown app. This fun method removes the current day of the event counter since the current day has already started, and removes the final day of the event counter since the last day is so close to the end and can be considered part of the event day. 'Magic Wand OFF' displays the standard countdown values. 'Magic Wand ON' takes 2 days off the event countdown. \n\nHold the Magic Wand button down to pop up a quick tip."
             self.InfoAlertMessage()
             
         } else if eventMenu == "About BGTY" {
             
             //-Call the Info Alert message
             self.infoTitle = "About Be Good To Yourself"
-            self.infoMessage = "Version 1.0\r\r Be Good To Yourself” is an event tracker and countdown App. Users can add as many events as they want. Events are automatically saved after they are created/edited.  The app includes the ability to fully customize the event view, create To Do lists and budget sheets for each event. Users can add their event to their local calendar and share them with social media apps.\r\r Copyright(c) 2016 GeoWorld. All rights reserved."
+            self.infoMessage = "Version 1.0\r\r Be Good To Yourself” is an event tracker and countdown App. You can add and manage as many events as you want. Events are automatically saved after they are created/edited.  The app includes the ability to fully customize the event view with an endless selection of pictures or photos, along with adding and printing To Do lists and budget sheets for each event. Users can add their events to their local calendar and share them with social media apps.\r\r Copyright(c) 2016 GeoWorld. All rights reserved."
             self.InfoAlertMessage()
         }
         
@@ -171,20 +171,15 @@ class BeGoodPopoverViewController: UITableViewController, UIPopoverPresentationC
     //-Info Alert Message function
     func InfoAlertMessage(){
         DispatchQueue.main.async {
+            
             let actionSheetController = UIAlertController(title: "\(self.infoTitle!)", message: "\(self.infoMessage!)", preferredStyle: .alert)
             
             //-Update alert colors and attributes
-            actionSheetController.view.tintColor = UIColor.blue
             let subview = actionSheetController.view.subviews.first!
             let alertContentView = subview.subviews.first!
-            //alertContentView.backgroundColor = UIColor(red:0.66,green:0.97,blue:0.59,alpha:1.0)
-            //alertContentView.backgroundColor = UIColor(colorLiteralRed: 0.66, green: 0.97, blue: 0.59, alpha: 1.0)
-            //alertContentView.backgroundColor = UIColor.green
-            
+            alertContentView.backgroundColor = UIColor.green
             alertContentView.layer.cornerRadius = 12
-            
-            
-            
+
             //-Create and add the OK action
             let okAction: UIAlertAction = UIAlertAction(title: "OK", style: .default) { action -> Void in
 
@@ -200,4 +195,5 @@ class BeGoodPopoverViewController: UITableViewController, UIPopoverPresentationC
     }
 
 }
+
 

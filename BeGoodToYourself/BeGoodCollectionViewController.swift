@@ -134,6 +134,7 @@ class BeGoodCollectionViewController: UIViewController, UICollectionViewDelegate
         
         bottomButton.isHidden = true
         editButtonFlag = true
+        SelectEventLabel.isHidden = true
         
         let index : Int = 0
         for _ in selectedIndexes{
@@ -283,6 +284,10 @@ class BeGoodCollectionViewController: UIViewController, UICollectionViewDelegate
             cell.eventImageView!.alpha = 1.0
             if selectedIndexes.isEmpty {
                 bottomButton.isHidden = true
+                //-show select event for removal label if still in edit mode
+                if self.navigationItem.leftBarButtonItem?.title == "Done"{
+                    SelectEventLabel.isHidden = false
+                }
             }
         }
     }

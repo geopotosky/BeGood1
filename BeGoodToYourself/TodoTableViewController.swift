@@ -76,6 +76,7 @@ class TodoTableViewController: UITableViewController, NSFetchedResultsController
         //let event = fetchedResultsController.object(at: eventIndexPath2)
         print(self.headerText)
         
+        //-Setup the To Do List header
         let formattedString = NSMutableAttributedString()
         if events.todoList.count == 1 {
             _ = formattedString.bold(text: self.headerText!).normal(text: "\n").normal(text: String(events.todoList.count)).normal(text: " Item")
@@ -97,7 +98,7 @@ class TodoTableViewController: UITableViewController, NSFetchedResultsController
         super.setEditing(editing, animated: animated)
         self.tableView.setEditing(editing, animated: animated)
         
-        //-Reset the Header count
+        //-Setup the To Do List header
         let formattedString = NSMutableAttributedString()
         if events.todoList.count == 1 {
             _ = formattedString.bold(text: self.headerText!).normal(text: "\n").normal(text: String(events.todoList.count)).normal(text: " Item")
@@ -294,29 +295,16 @@ class TodoTableViewController: UITableViewController, NSFetchedResultsController
         });
         
     }
-    
-    
-//    func drawHeaderForPage(at pageIndex: Int, in headerRect: CGRect) {
-//        if self.headerText != nil {
-//            var font = UIFont(name: "Helvetica", size: 20.0)
-//            var size = self.headerText
-//            // Center Text
-//            var drawX: CGFloat = CGRectGetMaxX(headerRect) / 2 - size.width / 2.0
-//            var drawY: CGFloat = CGRectGetMaxY(headerRect) - size.height - 2.0
-//            var drawPoint = CGPoint(x: drawX, y: drawY)
-//            self.headerText.draw(at: drawPoint, withAttributes: [String : Any]?)
-//        }
-//    }
-    
+
     
     //-Print the To Do List
     @IBAction func printList(_ sender: UIBarButtonItem) {
         
-        //-Take a snapshot of the screen
-        
+        //-Unhide navbar and toolbar
         self.navigationController!.setToolbarHidden(true, animated: true)
         self.navigationController!.setNavigationBarHidden(true, animated: true)
         
+        //-Take a snapshot of the screen
         let layer = UIApplication.shared.keyWindow!.layer
         let scale = UIScreen.main.scale
         UIGraphicsBeginImageContextWithOptions(layer.frame.size, false, scale);
@@ -324,17 +312,17 @@ class TodoTableViewController: UITableViewController, NSFetchedResultsController
         let screenshot = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
+        //-Printer Setup
         let printImage: UIImage = UIImage(cgImage: screenshot!.cgImage!, scale: 1.0, orientation: .up)
         let printInfo = UIPrintInfo(dictionary: nil)
         printInfo.outputType = .general
         let printController = UIPrintInteractionController.shared
         printController.printInfo = printInfo
         printController.showsNumberOfCopies = true
-        
         printController.printingItem = printImage
-        
         printController.present(animated: true, completionHandler: nil)
         
+        //-Unhide navbar and toolbar
         self.navigationController!.setToolbarHidden(false, animated: true)
         self.navigationController!.setNavigationBarHidden(false, animated: true)
         

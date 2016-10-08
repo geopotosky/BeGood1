@@ -330,6 +330,7 @@ class BeGoodTableViewController: UIViewController, UITableViewDelegate, UITableV
             //alertContentView.backgroundColor = UIColor(red:0.66,green:0.97,blue:0.59,alpha:1.0)
             //alertContentView.backgroundColor = UIColor.green
             alertContentView.layer.cornerRadius = 12
+            alertContentView.backgroundColor = UIColor.green
             
             //-Present the AlertController
             self.present(actionSheetController, animated: true, completion: nil)

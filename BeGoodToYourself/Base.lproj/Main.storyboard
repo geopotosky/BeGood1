@@ -110,17 +110,17 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap Event to Select for Removal" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fuW-9b-BMF" userLabel="Tap to Select for Removal">
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" red="0.0" green="0.47409017609999998" blue="0.81467177830000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WA7-Bf-IeR" customClass="RoundButton" customModule="BeGoodToYourself" customModuleProvider="target">
                                 <color key="backgroundColor" red="0.80000001190000003" green="1" blue="0.80000001190000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="39" id="0Bj-9q-5sN"/>
-                                    <constraint firstAttribute="width" constant="271" id="fk1-Np-kAV"/>
+                                    <constraint firstAttribute="width" constant="185" id="fk1-Np-kAV"/>
                                 </constraints>
                                 <state key="normal" title="Remove Selected Event">
-                                    <color key="titleColor" red="0.0" green="0.43921568989999998" blue="0.75294119120000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="buttonButtonClicked" destination="tJv-VY-X6r" eventType="touchUpInside" id="riu-Iq-gRl"/>
@@ -129,16 +129,16 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="fuW-9b-BMF" firstAttribute="leading" secondItem="WA7-Bf-IeR" secondAttribute="leading" constant="-52" id="1Vd-Jz-K07"/>
-                            <constraint firstItem="KAC-4a-Boz" firstAttribute="top" secondItem="WA7-Bf-IeR" secondAttribute="bottom" constant="47" id="EtW-qs-tB9"/>
-                            <constraint firstItem="fuW-9b-BMF" firstAttribute="trailing" secondItem="WA7-Bf-IeR" secondAttribute="trailing" constant="52" id="FK7-u7-5Np"/>
+                            <constraint firstItem="fuW-9b-BMF" firstAttribute="leading" secondItem="WA7-Bf-IeR" secondAttribute="leading" constant="-95" id="1Vd-Jz-K07"/>
+                            <constraint firstItem="KAC-4a-Boz" firstAttribute="top" secondItem="WA7-Bf-IeR" secondAttribute="bottom" constant="27" id="EtW-qs-tB9"/>
+                            <constraint firstItem="fuW-9b-BMF" firstAttribute="trailing" secondItem="WA7-Bf-IeR" secondAttribute="trailing" constant="95" id="FK7-u7-5Np"/>
                             <constraint firstItem="2VK-6E-nqj" firstAttribute="top" secondItem="sWz-cI-NRr" secondAttribute="top" id="FXr-yp-36c"/>
-                            <constraint firstItem="fuW-9b-BMF" firstAttribute="top" secondItem="WA7-Bf-IeR" secondAttribute="top" constant="59" id="PTM-XT-SnB"/>
+                            <constraint firstItem="fuW-9b-BMF" firstAttribute="top" secondItem="WA7-Bf-IeR" secondAttribute="top" constant="39" id="PTM-XT-SnB"/>
                             <constraint firstItem="2VK-6E-nqj" firstAttribute="leading" secondItem="sWz-cI-NRr" secondAttribute="leading" id="RRZ-o1-QhJ"/>
                             <constraint firstItem="2VK-6E-nqj" firstAttribute="bottom" secondItem="KAC-4a-Boz" secondAttribute="top" constant="49" id="Zud-MX-Bfj"/>
                             <constraint firstItem="WA7-Bf-IeR" firstAttribute="centerX" secondItem="2VK-6E-nqj" secondAttribute="centerX" id="eI8-eS-3JK"/>
                             <constraint firstAttribute="trailing" secondItem="2VK-6E-nqj" secondAttribute="trailing" id="gZF-7D-x23"/>
-                            <constraint firstItem="fuW-9b-BMF" firstAttribute="bottom" secondItem="WA7-Bf-IeR" secondAttribute="bottom" constant="47" id="phD-RM-3Uc"/>
+                            <constraint firstItem="fuW-9b-BMF" firstAttribute="bottom" secondItem="WA7-Bf-IeR" secondAttribute="bottom" constant="27" id="phD-RM-3Uc"/>
                         </constraints>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
@@ -305,20 +305,20 @@
                                     <action selector="pickEventDate:" destination="kX8-fN-XuE" eventType="touchUpInside" id="39B-QW-Nua"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Date Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q56-g9-rF8">
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Date Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q56-g9-rF8">
                                 <color key="backgroundColor" red="0.69019609689999994" green="0.88627451660000001" blue="0.94509804249999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Event Description" textAlignment="center" minimumFontSize="14" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="BRi-mk-BTB">
+                            <textField opaque="NO" clipsSubviews="YES" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Event Description" textAlignment="center" minimumFontSize="14" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="BRi-mk-BTB">
                                 <color key="backgroundColor" red="0.69019609689999994" green="0.88627451660000001" blue="0.94509804249999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="W0o-A5-5Yu"/>
                                 </constraints>
                                 <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                <textInputTraits key="textInputTraits"/>
                             </textField>
                             <toolbar clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uus-CX-FTE">
                                 <color key="backgroundColor" red="0.60000002379999995" green="1" blue="0.60000002379999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -633,7 +633,7 @@
                                     <action selector="segmentPicked:" destination="uaL-RV-rzP" eventType="valueChanged" id="qJj-cv-FdU"/>
                                 </connections>
                             </segmentedControl>
-                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Until Text2" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="anO-ZJ-wSv">
+                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Only XX Days" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="anO-ZJ-wSv">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="41" id="5HU-U1-bfW"/>
                                 </constraints>
@@ -651,14 +651,6 @@
                                 <color key="shadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Until Text3" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="I2Y-2p-Ens">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="Gzu-EO-NME"/>
-                                </constraints>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OFF" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2nf-f1-cpB">
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -686,13 +678,20 @@
                                 <color key="shadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <size key="shadowOffset" width="2" height="2"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Description" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HvZ-AF-CrS">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="kKE-Oc-UXm"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="HvZ-AF-CrS" firstAttribute="leading" secondItem="at6-mS-ZPT" secondAttribute="leadingMargin" id="0j1-E4-s1a"/>
                             <constraint firstItem="B6i-0m-MZz" firstAttribute="baseline" secondItem="DO8-C3-mzP" secondAttribute="baseline" id="25P-oe-jB8"/>
                             <constraint firstItem="88p-qG-CH9" firstAttribute="bottom" secondItem="Xy1-LB-LSo" secondAttribute="top" id="264-vI-pUo"/>
-                            <constraint firstItem="anO-ZJ-wSv" firstAttribute="leading" secondItem="I2Y-2p-Ens" secondAttribute="leading" id="3ni-cL-8PF"/>
-                            <constraint firstItem="anO-ZJ-wSv" firstAttribute="trailing" secondItem="I2Y-2p-Ens" secondAttribute="trailing" id="5Ua-Mi-445"/>
                             <constraint firstItem="B6i-0m-MZz" firstAttribute="trailing" secondItem="2nf-f1-cpB" secondAttribute="trailing" constant="-1" id="6uX-aZ-aIQ"/>
                             <constraint firstItem="Gq9-Q1-HGl" firstAttribute="baseline" secondItem="B6i-0m-MZz" secondAttribute="baseline" id="7Il-35-2Fk"/>
                             <constraint firstItem="2nf-f1-cpB" firstAttribute="top" secondItem="Wq6-KR-Tqs" secondAttribute="bottom" constant="25" id="7kZ-WW-i2U"/>
@@ -703,7 +702,6 @@
                             <constraint firstItem="yuz-7D-CP6" firstAttribute="leading" secondItem="61M-3w-Dj9" secondAttribute="trailing" constant="3" id="DMD-eW-3dB"/>
                             <constraint firstItem="88p-qG-CH9" firstAttribute="top" secondItem="at6-mS-ZPT" secondAttribute="top" id="DSn-6D-ZPd"/>
                             <constraint firstAttribute="trailingMargin" secondItem="anO-ZJ-wSv" secondAttribute="trailing" constant="-13" id="FY0-2Y-yVM"/>
-                            <constraint firstItem="I2Y-2p-Ens" firstAttribute="top" secondItem="anO-ZJ-wSv" secondAttribute="bottom" constant="8" symbolic="YES" id="FyC-S3-pGU"/>
                             <constraint firstItem="KfL-w3-l3v" firstAttribute="leading" secondItem="yuz-7D-CP6" secondAttribute="trailing" constant="3" id="GNv-v1-KWd"/>
                             <constraint firstItem="anO-ZJ-wSv" firstAttribute="leading" secondItem="at6-mS-ZPT" secondAttribute="leadingMargin" constant="-11" id="GNy-Kq-7OI"/>
                             <constraint firstItem="7F4-nT-YdI" firstAttribute="top" secondItem="Wq6-KR-Tqs" secondAttribute="bottom" id="H45-PK-BbG"/>
@@ -730,11 +728,13 @@
                             <constraint firstItem="XHV-sh-7TG" firstAttribute="baseline" secondItem="61M-3w-Dj9" secondAttribute="baseline" id="av6-qe-REJ"/>
                             <constraint firstItem="XHV-sh-7TG" firstAttribute="leading" secondItem="zS8-6v-wFE" secondAttribute="leading" id="bWR-Hw-4zc"/>
                             <constraint firstItem="KfL-w3-l3v" firstAttribute="leading" secondItem="abz-0d-gp2" secondAttribute="leading" id="dwg-AP-e3K"/>
+                            <constraint firstItem="HvZ-AF-CrS" firstAttribute="centerX" secondItem="zS8-6v-wFE" secondAttribute="centerX" id="fKt-qz-0uh"/>
                             <constraint firstItem="zS8-6v-wFE" firstAttribute="top" secondItem="XHV-sh-7TG" secondAttribute="top" id="fk4-VO-NXu"/>
                             <constraint firstItem="61M-3w-Dj9" firstAttribute="trailing" secondItem="B6i-0m-MZz" secondAttribute="trailing" id="guw-wc-wsT"/>
                             <constraint firstItem="R2m-Kp-Bv4" firstAttribute="centerX" secondItem="zS8-6v-wFE" secondAttribute="centerX" id="iHf-tP-UqS"/>
                             <constraint firstItem="yuz-7D-CP6" firstAttribute="trailing" secondItem="DO8-C3-mzP" secondAttribute="trailing" id="k8M-12-0Uz"/>
                             <constraint firstItem="XHV-sh-7TG" firstAttribute="firstBaseline" secondItem="61M-3w-Dj9" secondAttribute="firstBaseline" id="m2x-4h-SDk"/>
+                            <constraint firstItem="HvZ-AF-CrS" firstAttribute="top" secondItem="at6-mS-ZPT" secondAttribute="top" constant="273" id="q1f-yx-lVX"/>
                             <constraint firstItem="61M-3w-Dj9" firstAttribute="leading" secondItem="XHV-sh-7TG" secondAttribute="trailing" constant="3" id="qFJ-C5-mh2"/>
                             <constraint firstItem="Xy1-LB-LSo" firstAttribute="top" secondItem="2nf-f1-cpB" secondAttribute="bottom" id="qhe-gl-vp8"/>
                             <constraint firstItem="88p-qG-CH9" firstAttribute="leading" secondItem="R2m-Kp-Bv4" secondAttribute="leading" id="qme-iq-ppC"/>
@@ -772,6 +772,7 @@
                         <outlet property="editEventButton" destination="Ub0-1K-ngy" id="Mn9-oO-ZyO"/>
                         <outlet property="eventCalendarButton" destination="gkK-XE-4HY" id="VoN-dc-yRg"/>
                         <outlet property="eventDate" destination="Wq6-KR-Tqs" id="msA-xg-ODv"/>
+                        <outlet property="eventDescriptionLabel" destination="HvZ-AF-CrS" id="NBq-Id-Xwh"/>
                         <outlet property="hoursTickerLabel" destination="61M-3w-Dj9" id="AsF-tR-YqP"/>
                         <outlet property="hoursWordLabel" destination="B6i-0m-MZz" id="2re-Z5-Byc"/>
                         <outlet property="imageView" destination="88p-qG-CH9" id="3VK-lN-hRX"/>
@@ -785,7 +786,6 @@
                         <outlet property="toolbarObject" destination="7F4-nT-YdI" id="Epl-dd-3QP"/>
                         <outlet property="untilEventSelector" destination="R2m-Kp-Bv4" id="MQm-27-nkH"/>
                         <outlet property="untilEventText2" destination="anO-ZJ-wSv" id="tHr-Or-jcY"/>
-                        <outlet property="untilEventText3" destination="I2Y-2p-Ens" id="XJo-xn-mcx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e4g-p0-cnd" userLabel="First Responder" sceneMemberID="firstResponder"/>

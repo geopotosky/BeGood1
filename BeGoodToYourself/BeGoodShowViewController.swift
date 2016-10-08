@@ -36,6 +36,7 @@ class BeGoodShowViewController : UIViewController, NSFetchedResultsControllerDel
     @IBOutlet weak var untilEventText2: UITextField!
     @IBOutlet weak var untilEventText3: UITextField!
     @IBOutlet weak var magicButton: UIButton!
+    @IBOutlet weak var eventDescriptionLabel: UILabel!
 
     //-Global objects, properties & variables
     var events: [Events]!
@@ -93,6 +94,9 @@ class BeGoodShowViewController : UIViewController, NSFetchedResultsControllerDel
         //-Hide the Tab Bar
         self.tabBarController?.tabBar.isHidden = true
         
+        //-Create interactive Pop Gesture Recognizer
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
+        
         //-Hide the "Event Ended" message
         countDownLabel.isHidden = true
         
@@ -104,14 +108,21 @@ class BeGoodShowViewController : UIViewController, NSFetchedResultsControllerDel
         self.untilEventText2.layer.shadowOpacity = 0.5
         self.untilEventText2.layer.masksToBounds = false
 
-        //-UNTIL Description blur effects
-        self.untilEventText3.textAlignment = NSTextAlignment.center
-        self.untilEventText3.layer.shadowColor = UIColor.black.cgColor
-        self.untilEventText3.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
-        self.untilEventText3.layer.shadowRadius = 7.0
-        self.untilEventText3.layer.shadowOpacity = 0.5
-        self.untilEventText3.layer.masksToBounds = false
+//        //-UNTIL Description blur effects
+//        self.untilEventText3.textAlignment = NSTextAlignment.center
+//        self.untilEventText3.layer.shadowColor = UIColor.black.cgColor
+//        self.untilEventText3.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
+//        self.untilEventText3.layer.shadowRadius = 7.0
+//        self.untilEventText3.layer.shadowOpacity = 0.5
+//        self.untilEventText3.layer.masksToBounds = false
 
+        //-UNTIL Description blur effects
+        self.eventDescriptionLabel.textAlignment = NSTextAlignment.center
+        self.eventDescriptionLabel.layer.shadowColor = UIColor.black.cgColor
+        self.eventDescriptionLabel.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
+        self.eventDescriptionLabel.layer.shadowRadius = 7.0
+        self.eventDescriptionLabel.layer.shadowOpacity = 0.5
+        self.eventDescriptionLabel.layer.masksToBounds = false
         
         do {
             try fetchedResultsController.performFetch()
@@ -205,11 +216,25 @@ class BeGoodShowViewController : UIViewController, NSFetchedResultsControllerDel
         
         let finalImage = UIImage(data: event.eventImage!)
         self.imageView!.image = finalImage
-        self.untilEventText3.text = "until " + event.textEvent!
+//        self.untilEventText3.text = "until " + event.textEvent!
+        self.eventDescriptionLabel.text = "until " + event.textEvent!
 
         //-Call the main "until" setup routine
         untilCounterStart()
 
+    }
+    
+    
+    //-Perform when view will disappear
+    override func viewWillDisappear(_ animated: Bool) {
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        super.viewWillDisappear(animated)
+    }
+    
+    
+    //-Disable left to right slide gesture
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return false
     }
     
     
@@ -238,7 +263,7 @@ class BeGoodShowViewController : UIViewController, NSFetchedResultsControllerDel
         //-Call Alert message
         self.alertTitle = "Magic Wand TIP"
         self.alertMessage = "Turn on the Magic Wand to remove 2 days from the display counter."
-        self.calendarAlertMessage()
+        self.displayAlertMessage()
     }
     
     //-Set the "until" dynamic text based on segment selection
@@ -322,6 +347,7 @@ class BeGoodShowViewController : UIViewController, NSFetchedResultsControllerDel
         let alertContentView = subview.subviews.first! 
         //alertContentView.backgroundColor = UIColor(red:0.66,green:0.97,blue:0.59,alpha:1.0)
         alertContentView.layer.cornerRadius = 12
+        alertContentView.backgroundColor = UIColor.green
         
         //-Create and add the Cancel action
         let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .cancel) { action -> Void in
@@ -683,28 +709,30 @@ extension BeGoodShowViewController {
                 //-Call Alert message
                 self.alertTitle = "SUCCESS!"
                 self.alertMessage = "Event added to your Calendar"
-                self.calendarAlertMessage()
+                self.displayAlertMessage()
             } catch {
                 //-Call Alert message
                 self.alertTitle = "ALERT"
                 self.alertMessage = "One of your Calendars may be restricted. Please check to see if the Calendar event is added or allow access to add events."
-                self.calendarAlertMessage()
+                self.displayAlertMessage()
             }
         }
     
     
     //-Alert Message function
-    func calendarAlertMessage(){
+    func displayAlertMessage(){
         DispatchQueue.main.async {
             let actionSheetController = UIAlertController(title: "\(self.alertTitle!)", message: "\(self.alertMessage!)", preferredStyle: .alert)
             
             //-Update alert colors and attributes
-            actionSheetController.view.tintColor = UIColor.blue
+            //actionSheetController.view.tintColor = UIColor.blue
             let subview = actionSheetController.view.subviews.first! 
             let alertContentView = subview.subviews.first! 
-            //alertContentView.backgroundColor = UIColor(red:0.66,green:0.97,blue:0.59,alpha:1.0)
-            //alertContentView.backgroundColor = UIColor.green
+            //alertContentView.backgroundColor = UIColor(red: 0.66,green: 0.97,blue: 0.59,alpha: 1.0)
+
             alertContentView.layer.cornerRadius = 12
+            alertContentView.backgroundColor = UIColor.green
+            
             
             //-Create and add the OK action
             let okAction: UIAlertAction = UIAlertAction(title: "OK", style: .default) { action -> Void in
