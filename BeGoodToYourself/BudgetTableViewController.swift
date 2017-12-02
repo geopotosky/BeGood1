@@ -281,7 +281,7 @@ class BudgetTableViewController: UITableViewController, NSFetchedResultsControll
     
     
     //-Add Budget item function
-    func addBudgetList(){
+    @objc func addBudgetList(){
 
         let controller = self.storyboard?.instantiateViewController(withIdentifier: "BudgetAddTableViewController") as! BudgetAddTableViewController
         self.navigationController!.pushViewController(controller, animated: true)
@@ -289,7 +289,7 @@ class BudgetTableViewController: UITableViewController, NSFetchedResultsControll
     
     
     //-Cancel Budget List item function
-    func cancelBudgetList(){
+    @objc func cancelBudgetList(){
         let tmpController :UIViewController! = self.presentingViewController;
         self.dismiss(animated: false, completion: {()->Void in
             tmpController.dismiss(animated: false, completion: nil);

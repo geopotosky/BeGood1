@@ -59,7 +59,7 @@ class BeGoodTableViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     //-Only allow 64 events (push notification limitation)
-    func refreshList() {
+    @objc func refreshList() {
         //todoItems = TodoList.sharedInstance.allItems()
         if (events.count >= 64) {
             self.navigationItem.rightBarButtonItem!.isEnabled = false // disable 'add' button
@@ -307,7 +307,7 @@ class BeGoodTableViewController: UIViewController, UITableViewDelegate, UITableV
     
     
     //-Create a New EVent
-    func addEvent(){
+    @objc func addEvent(){
         //let storyboard = self.storyboard
         let controller = self.storyboard?.instantiateViewController(withIdentifier: "BeGoodAddEventViewController") as! BeGoodAddEventViewController
         controller.editEventFlag = false

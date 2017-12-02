@@ -89,7 +89,7 @@ class BeGoodCollectionViewController: UIViewController, UICollectionViewDelegate
     
     
     //-Only allow 64 events (push notification limitation)
-    func refreshList() {
+    @objc func refreshList() {
         if (events.count >= 64) {
             self.navigationItem.rightBarButtonItem!.isEnabled = false // disable 'add' button
         }
@@ -151,7 +151,7 @@ class BeGoodCollectionViewController: UIViewController, UICollectionViewDelegate
     
     
     //-Edit Events button function
-    func editButton(){
+    @objc func editButton(){
         
         if self.navigationItem.leftBarButtonItem?.title == "Done" {
             
@@ -434,7 +434,7 @@ class BeGoodCollectionViewController: UIViewController, UICollectionViewDelegate
     
     
     //-Create a New Event
-    func addEvent() {        
+    @objc func addEvent() {        
         let controller = self.storyboard?.instantiateViewController(withIdentifier: "BeGoodAddEventViewController") as! BeGoodAddEventViewController
         controller.editEventFlag = false
         self.navigationController!.pushViewController(controller, animated: true)

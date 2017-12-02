@@ -303,7 +303,7 @@ class BeGoodAddEventViewController: UIViewController, UIImagePickerControllerDel
         self.view.removeGestureRecognizer(tapRecognizer!)
     }
     
-    func handleSingleTap(_ recognizer: UITapGestureRecognizer) {
+    @objc func handleSingleTap(_ recognizer: UITapGestureRecognizer) {
         //-End editing here
         self.view.endEditing(true)
     }
@@ -341,7 +341,7 @@ class BeGoodAddEventViewController: UIViewController, UIImagePickerControllerDel
     
     
     //-Save the Event method
-    func saveEvent() {
+    @objc func saveEvent() {
 
         //-Create the adjusted event image.
         self.changedEventImage = createSnapshotOfView()

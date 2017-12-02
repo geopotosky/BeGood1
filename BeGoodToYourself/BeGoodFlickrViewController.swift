@@ -201,7 +201,7 @@ class BeGoodFlickrViewController: UIViewController, UISearchBarDelegate {
         self.view.removeGestureRecognizer(tapRecognizer!)
     }
     
-    func handleSingleTap(_ recognizer: UITapGestureRecognizer) {
+    @objc func handleSingleTap(_ recognizer: UITapGestureRecognizer) {
         //-End editing here
         self.view.endEditing(true)
     }

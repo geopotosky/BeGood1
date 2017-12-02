@@ -46,7 +46,7 @@ class BeGoodPopoverViewController: UITableViewController, UIPopoverPresentationC
     }
     
     
-    func tapCancel(_ : UIBarButtonItem) {
+    @objc func tapCancel(_ : UIBarButtonItem) {
         //-tap cancel
         dismiss(animated: true, completion:nil)
     }

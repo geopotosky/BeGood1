@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if !(UserDefaults.standard.object(forKey: "is_first_time") != nil) {
             application.cancelAllLocalNotifications()
             // Restart the Local Notifications list
-            UserDefaults.standard.set(Int(true), forKey: "is_first_time")
+            UserDefaults.standard.set(Int(truncating: true), forKey: "is_first_time")
             
             //-Add Splash screen delay
             Thread.sleep(forTimeInterval: 2)

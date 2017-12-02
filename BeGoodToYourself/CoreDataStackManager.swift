@@ -89,7 +89,7 @@ class CoreDataStackManager {
                 NSLocalizedDescriptionKey: "Failed to initialize the application's saved data",
                 NSLocalizedFailureReasonErrorKey: "There was an error creating or loading the application's saved data.",
                 NSUnderlyingErrorKey: error1]
-            let error = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict)
+            let error = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict as? [String : Any])
             
             // Left in for development.
             NSLog("Unresolved error \(error), \(error.userInfo)")

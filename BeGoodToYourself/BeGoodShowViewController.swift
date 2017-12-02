@@ -66,19 +66,19 @@ class BeGoodShowViewController : UIViewController, NSFetchedResultsControllerDel
     var alertTitle: String!
     
     //-Event Text Font Attributes
-    let eventTextAttributes = [
-        NSStrokeColorAttributeName : UIColor.black,
-        NSForegroundColorAttributeName : UIColor.white,
-        NSFontAttributeName : UIFont(name: "HelveticaNeue-Bold", size: 30)!,
-        NSStrokeWidthAttributeName : -2.0
-    ] as [String : Any]
+//    let eventTextAttributes = [
+//        NSAttributedStringKey.strokeColor.rawValue : UIColor.black,
+//        NSAttributedStringKey.foregroundColor : UIColor.white,
+//        NSAttributedStringKey.font : UIFont(name: "HelveticaNeue-Bold", size: 30)!,
+//        NSAttributedStringKey.strokeWidth : -2.0
+//        ] as! [String : Any]
     
-    let untilTextAttributes = [
-        NSStrokeColorAttributeName : UIColor.black,
-        NSForegroundColorAttributeName : UIColor.white,
-        NSFontAttributeName : UIFont(name: "HelveticaNeue-Bold", size: 20)!,
-        NSStrokeWidthAttributeName : -2.0
-    ] as [String : Any]
+//    let untilTextAttributes = [
+//        NSAttributedStringKey.strokeColor.rawValue : UIColor.black,
+//        NSAttributedStringKey.foregroundColor : UIColor.white,
+//        NSAttributedStringKey.font : UIFont(name: "HelveticaNeue-Bold", size: 20)!,
+//        NSAttributedStringKey.strokeWidth : -2.0
+//        ] as! [String : Any]
     
     //-Perform when view did load
     override func viewDidLoad() {
@@ -404,7 +404,7 @@ class BeGoodShowViewController : UIViewController, NSFetchedResultsControllerDel
     
     
     //-Update Countdown Time Viewer
-    func update() {
+    @objc func update() {
         
         if(count > 0)
         {

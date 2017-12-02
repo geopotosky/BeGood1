@@ -256,7 +256,7 @@ class TodoTableViewController: UITableViewController, NSFetchedResultsController
     
     
     //-Add To Do List item function
-    func addTodoList(){
+    @objc func addTodoList(){
 
         let controller = self.storyboard?.instantiateViewController(withIdentifier: "TodoAddTableViewController") as! TodoAddTableViewController
         self.navigationController!.pushViewController(controller, animated: true)
@@ -265,7 +265,7 @@ class TodoTableViewController: UITableViewController, NSFetchedResultsController
     
     //-Cancel To Do List item function
     
-    func cancelTodoList(){
+    @objc func cancelTodoList(){
         let tmpController :UIViewController! = self.presentingViewController;
         self.dismiss(animated: false, completion: {()->Void in
             tmpController.dismiss(animated: false, completion: nil);
@@ -312,7 +312,7 @@ class TodoTableViewController: UITableViewController, NSFetchedResultsController
 //-Bold and Normal Text Creation Shared Function
 extension NSMutableAttributedString {
     func bold(text:String) -> NSMutableAttributedString {
-        let attrs:[String:AnyObject] = [NSFontAttributeName : UIFont(name: "Helvetica-Bold", size: 17)!]
+        let attrs:[NSAttributedStringKey : Any] = [NSAttributedStringKey(rawValue: NSAttributedStringKey.font.rawValue) : UIFont(name: "Helvetica-Bold", size: 17)!]
         let boldString = NSMutableAttributedString(string:"\(text)", attributes:attrs)
         self.append(boldString)
         return self
