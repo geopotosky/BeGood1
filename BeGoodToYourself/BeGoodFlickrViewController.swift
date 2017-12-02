@@ -110,7 +110,7 @@ class BeGoodFlickrViewController: UIViewController, UISearchBarDelegate {
         
         //-Verify Phrase Textfield in NOT Empty
         
-        print(self.searchBar.text)
+        print(self.searchBar.text as Any)
         
         if self.searchBar.text!.isEmpty {
             

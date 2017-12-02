@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import CoreData
+import EventKit
 
 
 class BeGoodCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, NSFetchedResultsControllerDelegate {
@@ -70,7 +71,7 @@ class BeGoodCollectionViewController: UIViewController, UICollectionViewDelegate
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        // Lay out the collection view so that there are 3 cells accrosse
+        // Lay out the collection view so that there are 3 cells accross
         // with white space in between.
         let layout : UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -395,16 +396,33 @@ class BeGoodCollectionViewController: UIViewController, UICollectionViewDelegate
             if String(describing: event.eventDate!) > String(describing: Date()) { //...if event date is greater than the current date, remove the upcoming notification. If not, skip this routine.
                 
                 for notification in UIApplication.shared.scheduledLocalNotifications! as [UILocalNotification] { // loop through notifications...
-                    if (notification.userInfo!["UUID"] as! String == String(describing: event.eventDate!)) { // ...and cancel the notification that corresponds to this TodoItem instance (matched by UUID)
+                    if (notification.userInfo!["UUID"] as! String == String(describing: event.textEvent!)) { // ...and cancel the notification that corresponds to this TodoItem instance (matched by UUID)
                         UIApplication.shared.cancelLocalNotification(notification) // there should be a maximum of one match on title
                         break
                     }
                 }
             }
-            
-            sharedContext.delete(event)
-        }
         
+        //-Call Delete Calendar Event
+        
+        if event.textCalendarID == nil {
+            print("No calendar event.")
+        } else {
+            let eventStore = EKEventStore()
+            let eventID = event.textCalendarID!
+            let eventToRemove = eventStore.event(withIdentifier: eventID)
+            
+            if (eventToRemove != nil) {
+                do {
+                    try eventStore.remove(eventToRemove!, span: .thisEvent)
+                } catch {
+                    print("Calender Event Removal Failed.")
+                }
+            }
+        }
+        sharedContext.delete(event)
+        }
+        //-Delete Main Event        
         selectedIndexes = [IndexPath]()
         //-Save Object
         CoreDataStackManager.sharedInstance().saveContext()

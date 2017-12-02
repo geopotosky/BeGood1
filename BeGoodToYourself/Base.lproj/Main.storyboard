@@ -114,13 +114,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WA7-Bf-IeR" customClass="RoundButton" customModule="BeGoodToYourself" customModuleProvider="target">
-                                <color key="backgroundColor" red="0.80000001190000003" green="1" blue="0.80000001190000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="39" id="0Bj-9q-5sN"/>
-                                    <constraint firstAttribute="width" constant="185" id="fk1-Np-kAV"/>
+                                    <constraint firstAttribute="width" constant="207" id="fk1-Np-kAV"/>
                                 </constraints>
                                 <state key="normal" title="Remove Selected Event">
-                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="buttonButtonClicked" destination="tJv-VY-X6r" eventType="touchUpInside" id="riu-Iq-gRl"/>
@@ -129,16 +129,16 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="fuW-9b-BMF" firstAttribute="leading" secondItem="WA7-Bf-IeR" secondAttribute="leading" constant="-95" id="1Vd-Jz-K07"/>
-                            <constraint firstItem="KAC-4a-Boz" firstAttribute="top" secondItem="WA7-Bf-IeR" secondAttribute="bottom" constant="27" id="EtW-qs-tB9"/>
-                            <constraint firstItem="fuW-9b-BMF" firstAttribute="trailing" secondItem="WA7-Bf-IeR" secondAttribute="trailing" constant="95" id="FK7-u7-5Np"/>
+                            <constraint firstItem="fuW-9b-BMF" firstAttribute="leading" secondItem="WA7-Bf-IeR" secondAttribute="leading" constant="-84" id="1Vd-Jz-K07"/>
+                            <constraint firstItem="KAC-4a-Boz" firstAttribute="top" secondItem="WA7-Bf-IeR" secondAttribute="bottom" constant="8" id="EtW-qs-tB9"/>
+                            <constraint firstItem="fuW-9b-BMF" firstAttribute="trailing" secondItem="WA7-Bf-IeR" secondAttribute="trailing" constant="84" id="FK7-u7-5Np"/>
                             <constraint firstItem="2VK-6E-nqj" firstAttribute="top" secondItem="sWz-cI-NRr" secondAttribute="top" id="FXr-yp-36c"/>
-                            <constraint firstItem="fuW-9b-BMF" firstAttribute="top" secondItem="WA7-Bf-IeR" secondAttribute="top" constant="39" id="PTM-XT-SnB"/>
+                            <constraint firstItem="fuW-9b-BMF" firstAttribute="top" secondItem="WA7-Bf-IeR" secondAttribute="top" constant="20" id="PTM-XT-SnB"/>
                             <constraint firstItem="2VK-6E-nqj" firstAttribute="leading" secondItem="sWz-cI-NRr" secondAttribute="leading" id="RRZ-o1-QhJ"/>
                             <constraint firstItem="2VK-6E-nqj" firstAttribute="bottom" secondItem="KAC-4a-Boz" secondAttribute="top" constant="49" id="Zud-MX-Bfj"/>
                             <constraint firstItem="WA7-Bf-IeR" firstAttribute="centerX" secondItem="2VK-6E-nqj" secondAttribute="centerX" id="eI8-eS-3JK"/>
                             <constraint firstAttribute="trailing" secondItem="2VK-6E-nqj" secondAttribute="trailing" id="gZF-7D-x23"/>
-                            <constraint firstItem="fuW-9b-BMF" firstAttribute="bottom" secondItem="WA7-Bf-IeR" secondAttribute="bottom" constant="27" id="phD-RM-3Uc"/>
+                            <constraint firstItem="fuW-9b-BMF" firstAttribute="bottom" secondItem="WA7-Bf-IeR" secondAttribute="bottom" constant="8" id="phD-RM-3Uc"/>
                         </constraints>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
@@ -250,11 +250,11 @@
                         <viewControllerLayoutGuide type="top" id="edH-WT-gLA"/>
                         <viewControllerLayoutGuide type="bottom" id="kN0-SL-aba"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="t2b-MU-NpR">
+                    <view key="view" contentMode="scaleAspectFill" id="t2b-MU-NpR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cc2-eB-Shm">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cc2-eB-Shm">
                                 <subviews>
                                     <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JpZ-Lq-gCl">
                                         <gestureRecognizers/>
@@ -318,7 +318,7 @@
                                 </constraints>
                                 <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                             </textField>
                             <toolbar clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uus-CX-FTE">
                                 <color key="backgroundColor" red="0.60000002379999995" green="1" blue="0.60000002379999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -361,6 +361,8 @@
                             <constraint firstAttribute="trailingMargin" secondItem="Iad-Gy-IQg" secondAttribute="trailing" constant="9" id="3CY-qs-aTy"/>
                             <constraint firstItem="BRi-mk-BTB" firstAttribute="trailing" secondItem="q56-g9-rF8" secondAttribute="trailing" id="4j9-bV-SLG"/>
                             <constraint firstItem="q56-g9-rF8" firstAttribute="leading" secondItem="Iad-Gy-IQg" secondAttribute="leading" id="Axg-mv-C1t"/>
+                            <constraint firstItem="Cc2-eB-Shm" firstAttribute="top" secondItem="t2b-MU-NpR" secondAttribute="top" id="CwW-o0-LZn"/>
+                            <constraint firstAttribute="trailing" secondItem="Cc2-eB-Shm" secondAttribute="trailing" id="DzY-dq-EcL"/>
                             <constraint firstItem="Cc2-eB-Shm" firstAttribute="top" secondItem="t2b-MU-NpR" secondAttribute="top" id="FSM-Jh-hFz"/>
                             <constraint firstItem="uus-CX-FTE" firstAttribute="bottom" secondItem="kN0-SL-aba" secondAttribute="top" id="GIf-C8-nMo"/>
                             <constraint firstAttribute="trailing" secondItem="Cc2-eB-Shm" secondAttribute="trailing" id="KRx-1S-kjl"/>
@@ -370,9 +372,11 @@
                             <constraint firstItem="Cc2-eB-Shm" firstAttribute="leading" secondItem="t2b-MU-NpR" secondAttribute="leading" id="W9K-Ql-xe5"/>
                             <constraint firstItem="Iad-Gy-IQg" firstAttribute="bottom" secondItem="q56-g9-rF8" secondAttribute="bottom" id="avr-le-xFe"/>
                             <constraint firstItem="Cc2-eB-Shm" firstAttribute="leading" secondItem="uus-CX-FTE" secondAttribute="leading" id="b5D-gE-AeT"/>
+                            <constraint firstItem="kN0-SL-aba" firstAttribute="top" secondItem="Cc2-eB-Shm" secondAttribute="bottom" id="bwa-i8-Y11"/>
                             <constraint firstItem="Cc2-eB-Shm" firstAttribute="bottom" secondItem="kN0-SL-aba" secondAttribute="top" id="f3Q-Sx-tE4"/>
                             <constraint firstItem="txT-vq-L4S" firstAttribute="centerY" secondItem="Cc2-eB-Shm" secondAttribute="centerY" id="fsC-5W-BYC"/>
                             <constraint firstItem="Iad-Gy-IQg" firstAttribute="top" secondItem="q56-g9-rF8" secondAttribute="top" id="hnN-Uz-RAX"/>
+                            <constraint firstItem="Cc2-eB-Shm" firstAttribute="leading" secondItem="t2b-MU-NpR" secondAttribute="leading" id="jyX-nM-VoZ"/>
                             <constraint firstItem="q56-g9-rF8" firstAttribute="centerX" secondItem="uus-CX-FTE" secondAttribute="centerX" id="t9O-c6-LNQ"/>
                             <constraint firstItem="BRi-mk-BTB" firstAttribute="top" secondItem="edH-WT-gLA" secondAttribute="bottom" constant="43" id="yVo-Gd-KDq"/>
                         </constraints>
@@ -423,9 +427,7 @@
                                 <color key="barTintColor" red="0.60000002379999995" green="1" blue="0.60000002379999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
-                            <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kWa-8c-41N" customClass="ActivitySquare" customModule="BeGoodToYourself" customModuleProvider="target">
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kWa-8c-41N"/>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="BVU-P7-qmq">
                                 <color key="color" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </activityIndicatorView>
@@ -435,14 +437,13 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" alpha="0.89999999999999991" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Xb-iV-kKJ" customClass="RoundButton" customModule="BeGoodToYourself" customModuleProvider="target">
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="38" id="Rnd-ch-8No"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Use This Picture">
-                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="pickFlickrImage:" destination="ZmE-op-jQe" eventType="touchUpInside" id="r9T-gy-k5k"/>
@@ -818,22 +819,21 @@
                                 </connections>
                             </datePicker>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hq5-Oo-qTM" customClass="RoundButton" customModule="BeGoodToYourself" customModuleProvider="target">
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="188" id="HQh-c9-HYJ"/>
                                     <constraint firstAttribute="height" constant="36" id="qpf-hx-tNd"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Select Event Date">
-                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="pickEventDate:" destination="4Kf-R2-ncF" eventType="touchUpInside" id="qlh-O7-WRu"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AHU-oo-1Xu">
-                                <color key="backgroundColor" red="0.80000001190000003" green="1" blue="0.80000001190000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.60000002379999995" green="1" blue="0.60000002379999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="321" id="GIf-lS-yiO"/>
                                     <constraint firstAttribute="height" constant="31" id="dti-75-0yl"/>
@@ -841,6 +841,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
+                                <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <size key="shadowOffset" width="1" height="1"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.85920250519999997" green="0.96853656489999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

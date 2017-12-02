@@ -87,7 +87,9 @@ class BudgetEditTableViewController: UITableViewController, UITextFieldDelegate,
             dataString = textField.text
             priceString = priceTextField.text
         }
-        print("Segue Error")
+        else {
+            print("Segue Error")
+        }
 
     }
     

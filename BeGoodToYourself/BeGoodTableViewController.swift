@@ -213,7 +213,7 @@ class BeGoodTableViewController: UIViewController, UITableViewDelegate, UITableV
                 if String(describing: event.eventDate!) > String(describing: Date()) { //...if event date is greater than the current date, remove the upcoming notification. If not, skip this routine.
                     
                     for notification in UIApplication.shared.scheduledLocalNotifications! as [UILocalNotification] { // loop through notifications...
-                        if (notification.userInfo!["UUID"] as! String == String(describing: event.eventDate!)) { // ...and cancel the notification that corresponds to this TodoItem instance (matched by UUID)
+                        if (notification.userInfo!["UUID"] as! String == String(describing: event.textEvent!)) { // ...and cancel the notification that corresponds to this TodoItem instance (matched by UUID)
                             UIApplication.shared.cancelLocalNotification(notification) // there should be a maximum of one match on title
                             break
                         }
@@ -222,7 +222,7 @@ class BeGoodTableViewController: UIViewController, UITableViewDelegate, UITableV
                 
                 //-Call Delete Calendar Event
                 if event.textCalendarID == nil {
-                    print("No calendar event:", event.textCalendarID)
+                    print("No calendar event")
                 } else {
                     let eventStore = EKEventStore()
                     let eventID = event.textCalendarID!
@@ -286,8 +286,14 @@ class BeGoodTableViewController: UIViewController, UITableViewDelegate, UITableV
             case .update:
                 let cell = tableView.cellForRow(at: indexPath!) as UITableViewCell?
                 let event = controller.object(at: indexPath!) as! Events
-                self.configureCell(cell!, withEvent: event)
-                
+                if event.textCalendarID == nil {
+                    
+                    self.configureCell(cell!, withEvent: event)
+                }
+                else {
+                    print("Calendar button pushed")
+                }
+        
             case .move:
                 tableView.deleteRows(at: [indexPath!], with: .fade)
                 tableView.insertRows(at: [newIndexPath!], with: .fade)
@@ -313,7 +319,7 @@ class BeGoodTableViewController: UIViewController, UITableViewDelegate, UITableV
     var eventsFilePath : String {
         let manager = FileManager.default
         let url = manager.urls(for: .documentDirectory, in: .userDomainMask).first! as URL
-        print(url.appendingPathComponent("events").path)
+        //print(url.appendingPathComponent("events").path)
         return url.appendingPathComponent("events").path
     }
     
@@ -341,5 +347,6 @@ class BeGoodTableViewController: UIViewController, UITableViewDelegate, UITableV
             self.presentedViewController!.dismiss(animated: true, completion: nil);
         }
     }
+    
 }
 

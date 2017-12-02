@@ -72,6 +72,7 @@ class BeGoodShowViewController : UIViewController, NSFetchedResultsControllerDel
         NSFontAttributeName : UIFont(name: "HelveticaNeue-Bold", size: 30)!,
         NSStrokeWidthAttributeName : -2.0
     ] as [String : Any]
+    
     let untilTextAttributes = [
         NSStrokeColorAttributeName : UIColor.black,
         NSForegroundColorAttributeName : UIColor.white,
@@ -107,14 +108,6 @@ class BeGoodShowViewController : UIViewController, NSFetchedResultsControllerDel
         self.untilEventText2.layer.shadowRadius = 7.0
         self.untilEventText2.layer.shadowOpacity = 0.5
         self.untilEventText2.layer.masksToBounds = false
-
-//        //-UNTIL Description blur effects
-//        self.untilEventText3.textAlignment = NSTextAlignment.center
-//        self.untilEventText3.layer.shadowColor = UIColor.black.cgColor
-//        self.untilEventText3.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
-//        self.untilEventText3.layer.shadowRadius = 7.0
-//        self.untilEventText3.layer.shadowOpacity = 0.5
-//        self.untilEventText3.layer.masksToBounds = false
 
         //-UNTIL Description blur effects
         self.eventDescriptionLabel.textAlignment = NSTextAlignment.center
@@ -174,6 +167,14 @@ class BeGoodShowViewController : UIViewController, NSFetchedResultsControllerDel
         
         let event = fetchedResultsController.object(at: eventIndexPath)
         
+        //-Enable event calendar button is no calendar entry exists yet
+        if event.textCalendarID != nil {
+            eventCalendarButton.isEnabled = false
+        } else {
+            eventCalendarButton.isEnabled = true
+        }
+        
+        
         let dateFormatter = DateFormatter()
         let date = event.eventDate
         let timeZone = TimeZone(identifier: "Local")
@@ -216,7 +217,6 @@ class BeGoodShowViewController : UIViewController, NSFetchedResultsControllerDel
         
         let finalImage = UIImage(data: event.eventImage!)
         self.imageView!.image = finalImage
-//        self.untilEventText3.text = "until " + event.textEvent!
         self.eventDescriptionLabel.text = "until " + event.textEvent!
 
         //-Call the main "until" setup routine
@@ -358,16 +358,15 @@ class BeGoodShowViewController : UIViewController, NSFetchedResultsControllerDel
         //-Create and add the Delete Event action
         let deleteAction: UIAlertAction = UIAlertAction(title: "Delete Event", style: .default) { action -> Void in
             
-            //-Get the event, then delete it from core data, delete related notifications, and remove any existing
-            //-Calendar Event
+            //-Get the event, then delete it from core data, delete related notifications,
+            //-and remove any existing Calendar Event
             
             let event = self.fetchedResultsController.object(at: self.eventIndexPath) 
             
             //-Delete the event notificaton
             if String(describing: event.eventDate!) > String(describing: Date()) { //...if event date is greater than the current date, remove the upcoming notification. If not, skip this routine.
-                
                 for notification in UIApplication.shared.scheduledLocalNotifications! as [UILocalNotification] { // loop through notifications...
-                    if (notification.userInfo!["UUID"] as! String == String(describing: event.eventDate!)) { // ...and cancel the notification that corresponds to this TodoItem instance (matched by UUID)
+                    if (notification.userInfo!["UUID"] as! String == String(describing: event.textEvent!)){ // ...and cancel the notification that corresponds to this event instance (matched by UUID)
                         UIApplication.shared.cancelLocalNotification(notification) // there should be a maximum of one match on title
                         break
                     }
@@ -376,7 +375,7 @@ class BeGoodShowViewController : UIViewController, NSFetchedResultsControllerDel
             
             //-Call Delete Calendar Event
             if event.textCalendarID == nil {
-                print("No calendar event:", event.textCalendarID)
+                print("No calendar event.")
             } else {
                 let eventStore = EKEventStore()
                 let eventID = event.textCalendarID!
@@ -657,66 +656,89 @@ extension BeGoodShowViewController {
     }
 
     
+    func addEventToCalendar(calendarTitle: String, startDate: Date, endDate: NSDate, completion: ((_ success: Bool, _ error: NSError?) -> Void)? = nil) {
+        
+        let eventStore = EKEventStore()
+
+        let event = fetchedResultsController.object(at: eventIndexPath)
+        
+        eventStore.requestAccess(to: .event, completion: { (granted, error) in
+            if (granted) && (error == nil) {
+                
+                
+                //-Disable the event calendar button after use
+                self.eventCalendarButton.isEnabled = false
+                
+                //-Create Calendar Event
+                print("granted =", granted)
+                let calendarEvent = EKEvent(eventStore: eventStore)
+                calendarEvent.calendar = eventStore.defaultCalendarForNewEvents
+                
+                calendarEvent.title = calendarTitle
+                calendarEvent.startDate = startDate
+                calendarEvent.endDate = endDate as Date
+                
+                
+                //-Set alert for 1 hour prior to Event
+                let alarm = EKAlarm(relativeOffset: -3600.0)
+                calendarEvent.addAlarm(alarm)
+                
+                calendarEvent.notes = calendarTitle
+                
+                
+                do {
+                    try eventStore.save(calendarEvent, span: .thisEvent)
+                } catch let errorC as NSError {
+                    //-Call Alert message
+                    self.alertTitle = "ALERT!"
+                    self.alertMessage = "Event was not added to your Calendar."
+                    
+                    //-Disable the event calendar button after use
+                    self.eventCalendarButton.isEnabled = true
+                    
+                    completion?(false, errorC)
+                    return
+                }
+                event.textCalendarID = calendarEvent.eventIdentifier
+                self.sharedContext.refresh(event, mergeChanges: true)
+                CoreDataStackManager.sharedInstance().saveContext()
+                
+                //-Call Alert message
+                self.alertTitle = "SUCCESS!"
+                self.alertMessage = "Event added to your Calendar"
+                self.displayAlertMessage()
+                
+                completion?(true, nil)
+            } else {
+                //-Call Alert message
+                self.alertTitle = "ALERT!"
+                self.alertMessage = "Authorization Not Granted."
+                completion?(false, error as NSError?)
+            }
+        })
+    }
+    
+    
+    
     // Responds to button to add event. This checks that we have permission first, before adding the event
     @IBAction func addCalendarEvent(_ sender: UIButton) {
-        let eventStore = EKEventStore()
+        //let eventStore = EKEventStore()
     
         let event = fetchedResultsController.object(at: eventIndexPath) 
+        
+        //-Set the selected event Title
+        let title = event.textEvent!
         
         //-Set the selected event start date & time
         let startDate = event.eventDate
         
         //-2 hours ahead for endtime
         let endDate = startDate!.addingTimeInterval(2 * 60 * 60)
-    
-        if (EKEventStore.authorizationStatus(for: .event) != EKAuthorizationStatus.authorized) {
-            eventStore.requestAccess(to: .event, completion: {
-                granted, error in
-                self.insertEvent(eventStore, startDate: startDate!, endDate: endDate)
-            })
-        } else {
-            self.insertEvent(eventStore, startDate: startDate!, endDate: endDate)
-        }
+        
+        addEventToCalendar(calendarTitle: title, startDate: event.eventDate!, endDate: endDate as NSDate)
+
     }
 
-    
-    // Creates an event in the EKEventStore. The method assumes the eventStore is created and accessible
-        func insertEvent(_ eventStore: EKEventStore, startDate: Date, endDate: Date) {
-            
-            let event = fetchedResultsController.object(at: eventIndexPath) 
-            
-            //-Create Calendar Event
-            let calendarEvent = EKEvent(eventStore: eventStore)
-            calendarEvent.calendar = eventStore.defaultCalendarForNewEvents
-            
-            calendarEvent.title = event.textEvent!
-            calendarEvent.startDate = startDate
-            calendarEvent.endDate = endDate
-            
-            
-            //-Set alert for 1 hour prior to Event
-            let alarm = EKAlarm(relativeOffset: -3600.0)
-            calendarEvent.addAlarm(alarm)
-            
-            do {
-                try eventStore.save(calendarEvent, span: .thisEvent)
-                //-ReSave the event with the calendar Identifier
-                event.textCalendarID = calendarEvent.eventIdentifier
-                self.sharedContext.refresh(event, mergeChanges: true)
-                CoreDataStackManager.sharedInstance().saveContext()
-                
-                
-                //-Call Alert message
-                self.alertTitle = "SUCCESS!"
-                self.alertMessage = "Event added to your Calendar"
-                self.displayAlertMessage()
-            } catch {
-                //-Call Alert message
-                self.alertTitle = "ALERT"
-                self.alertMessage = "One of your Calendars may be restricted. Please check to see if the Calendar event is added or allow access to add events."
-                self.displayAlertMessage()
-            }
-        }
     
     
     //-Alert Message function

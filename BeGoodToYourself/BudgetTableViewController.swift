@@ -27,44 +27,6 @@ class BudgetTableViewController: UITableViewController, NSFetchedResultsControll
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        //-Colorize NavBar & ToolBar
-        self.navigationController!.navigationBar.barTintColor = UIColor(red:0.66,green:0.97,blue:0.59,alpha:1.0)
-        self.navigationController?.toolbar.barTintColor = UIColor(red: 0.66, green: 0.97, blue: 0.59, alpha: 1.0)
-        
-//        //-Create NavBar Items
-//        let newBackButton = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.plain, target: self, action: #selector(TodoTableViewController.cancelTodoList))
-//        self.navigationItem.leftBarButtonItem = newBackButton
-//        
-//        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(TodoTableViewController.addTodoList))
-//        
-//        //-Create toolBarItems
-//        let toolBar1 = self.editButtonItem
-//        let toolBar2 = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
-//        //        //let toolBar3 = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(TodoTableViewController.printListPage))
-//        
-//        let printerImage = UIImage(named: "printer2-30.png") as UIImage?
-//        let toolBar3 = UIBarButtonItem(image: printerImage, style: UIBarButtonItemStyle.plain, target: self, action: #selector(TodoTableViewController.printListPage))
-//        
-//        
-//        self.toolbarItems = [toolBar1, toolBar2, toolBar3]
-//        
-//        //-Show the toolBar
-//        self.navigationController!.setToolbarHidden(false, animated: true)
-
-        
-        
-        
-        
-//        //-Create Navbar Buttons
-//        self.navigationController!.navigationBar.barTintColor = UIColor(red:0.66,green:0.97,blue:0.59,alpha:1.0)
-//        let newBackButton = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.plain, target: self, action: #selector(BudgetTableViewController.cancelBudgetList))
-//        self.navigationItem.leftBarButtonItem = newBackButton
-//
-//        let b1 = self.editButtonItem
-//        let b2 = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(BudgetTableViewController.addBudgetList))
-//        self.navigationItem.rightBarButtonItems = [b2, b1]
-        
         //-Colorize NavBar & ToolBar
         self.navigationController!.navigationBar.barTintColor = UIColor(red:0.66,green:0.97,blue:0.59,alpha:1.0)
         self.navigationController?.toolbar.barTintColor = UIColor(red: 0.66, green: 0.97, blue: 0.59, alpha: 1.0)

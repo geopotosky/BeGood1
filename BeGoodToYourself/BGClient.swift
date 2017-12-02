@@ -150,8 +150,7 @@ class BGClient : NSObject {
                             let randomPhotoIndex = Int(arc4random_uniform(UInt32(photosArray.count)))
                             
                             print(randomPhotoIndex)
-                            print("")
-                            
+
                             //-Watch for an empty random photo index
                             if randomPhotoIndex == 0 {
                                 completionHandler(false, nil, "No Image Found. Try Again.")
@@ -163,30 +162,15 @@ class BGClient : NSObject {
                                 //-Get the image url
                                 let imageUrlString = photoDictionary["url_m"] as? String
                                 let imageURL = URL(string: imageUrlString!)
-                                //let urlRequest = URLRequest(url: imageURL!)
-                                //let mainQueue = OperationQueue()
                                 
                                 /* If an image exists at the url, set the image and title */
                                 if NSData(contentsOf: imageURL!) != nil {
                                     DispatchQueue.main.async {
                                         completionHandler(true, imageUrlString, nil)
                                         }
-                                        //completionHandler(true, imageUrlString, nil)
                                 }else {
                                         completionHandler(false, nil, "No Image Found. Try Again.")
                                     }
-
-                                
-                                
-                                //NSURLConnection.sendAsynchronousRequest(urlRequest, queue: mainQueue, completionHandler://{(response: URLResponse?, data: Data?, error: NSError?) -> Void in
-                                    //if data!.count > 0 && error == nil {
-
-                                        //completionHandler(true, imageUrlString, nil)
-                                    //}
-                                    //else {
-                                        //completionHandler(false, nil, "No Image Found. Try Again.")
-                                    //}
-                                //} as! (URLResponse?, Data?, Error?) -> Void ) //-End NSURLConnection routine
 
                             } //-End Fix flickr Index Out of Range Error
                             

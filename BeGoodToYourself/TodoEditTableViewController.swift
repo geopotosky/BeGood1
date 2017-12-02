@@ -76,7 +76,9 @@ class TodoEditTableViewController: UITableViewController, NSFetchedResultsContro
         if segue.identifier == "saveDataEdit" {
             editedModel = editModelTextField.text
         }
-        print("Segue Error")
+        else {
+            print("Segue Error")
+        }
 
     }
     

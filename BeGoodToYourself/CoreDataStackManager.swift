@@ -130,7 +130,7 @@ class CoreDataStackManager {
                     try context.save()
                 } catch let error1 as NSError {
                     error = error1
-                    NSLog("Unresolved error \(error), \(error!.userInfo)")
+                    NSLog("Unresolved error \(String(describing: error)), \(error!.userInfo)")
                     abort()
                 }
             }
