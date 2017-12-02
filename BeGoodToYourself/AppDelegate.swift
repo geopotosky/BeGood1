@@ -3,7 +3,7 @@
 //  BeGoodToYourself
 //
 //  Created by George Potosky October 2016.
-//  Copyright (c) 2016 GeoWorld. All rights reserved.
+//  Copyright (c) 2017 GeoWorld. All rights reserved.
 //
 
 import UIKit
