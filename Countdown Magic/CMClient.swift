@@ -1,5 +1,5 @@
 //
-//  BGClient.swift
+//  CMClient.swift
 //  Countdown Magic
 //
 //  Created by George Potosky October 2018.
@@ -12,7 +12,7 @@ import UIKit
 import CoreData
 
 
-class BGClient : NSObject {
+class CMClient : NSObject {
     
     //-Shared session
     var session: URLSession
@@ -214,10 +214,10 @@ class BGClient : NSObject {
     
     //-Shared Instance
     
-    class func sharedInstance() -> BGClient {
+    class func sharedInstance() -> CMClient {
         
         struct Singleton {
-            static var sharedInstance = BGClient()
+            static var sharedInstance = CMClient()
         }
         
         return Singleton.sharedInstance

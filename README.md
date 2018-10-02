@@ -1,9 +1,9 @@
-===========
-BGTY README
-===========
+=====================
+Countdown Magic README
+=====================
 
 
-“Be Good To Yourself” is an event tracker and countdown App. Users can add as many events as they want, however only the first 64 events will use notifications (Apple iOS limitation). Events are automatically saved after they are created/edited.  The app includes the ability to create ToDo lists and budget sheets for each event. Users can add their event to their local calendar and share them with social media apps.  Finally, BGTY includes a special feature called the Magic Wand. Originally called the “MG” Coefficient, the magic wand visually removes 2 days from the overall countdown; the first day, which is the current day, and the final day, both of which really don’t count, especially if you are excited and ready to "Be Good To Yourself".
+Countdown Magic is an event tracker and countdown App. Users can add as many events as they want, however only the first 64 events will use notifications (Apple iOS limitation). Events are automatically saved after they are created/edited.  The app includes the ability to create ToDo lists and budget sheets for each event. Users can add their event to their local calendar and share them with social media apps.  Finally, Countdown Magic includes a special feature called the Magic Wand. The magic wand visually removes 2 days from the overall countdown; the first day, which is the current day, and the final day, both of which really don’t count, especially if you are excited and ready to enjoy the magic.
 
 
 ---------------
@@ -12,9 +12,9 @@ My Events Scene
 
 Files:
 ------
-BeGoodTableViewController.swift
-BeGoodCollectionViewController.swift
-BeGoodCollectionViewCell.swift
+CMTableViewController.swift
+CMCollectionViewController.swift
+CMCollectionViewCell.swift
 
 The My Events scenes display the list of events currently saved. There are 2 views: Table view and Collection view. Both behave the same way and have similar options.
 
@@ -47,13 +47,13 @@ Tap (if necessary) the Collection icon in the bottom tab bar to view the My Even
 •	Tap the “Edit” button to delete an event. Tap each event item to select it (turns ligher). When ready, tap the “Remove Event” button on the bottom of the screen to delete the event. Tap “Done” when editing is complete.
 
 
----------------
+------------------------------
 Countdown Scene
----------------
+---------------------
 
 Files:
 ------
-BeGoodShowViewController.swift
+CMShowViewController.swift
 
 The Countdown scene displays the event in countdown mode. This app centers around the countdown display scene. The scene can be accessed by tapping an existing event in the MyEvents scene.
 
@@ -85,28 +85,29 @@ Tap one of the time elements (Weeks, Days, Hours, Minutes, Seconds) on the Selec
 The Magic Wand
 --------------
 
-The Magic Wand method, previously known as the MG Coefficient, is a very unique countdown element not available in any other countdown App. This fun method:
-    1. removes the 1st day of the event counter. Reasoning is the 1st day has already started and doesn’t really count (as part of the countdown when using the MG Coefficient).
-    2. removes the final day of the event counter. Reasoning is the last day is considered part of the event day (as part of countdown when using the MG Coefficient).
+The Magic Wand method is a very unique countdown element not available in any other countdown App. This fun method:
+    1. removes the 1st day of the event counter. Reasoning is the 1st day has already started and doesn’t really count.
+    2. removes the final day of the event counter. Reasoning is the last day is considered part of the event day and hence, doesn't really count.
+    3. therefore, 2 days removed for those too excited to hold it in.
 
 Magic Mode:
 
-•	Magic Wand OFF: Displays the standard countdown values.
+•	Magic Wand with clear star: Displays the standard countdown values.
 
-•	Magic Wand ON: Take 1 day off the front of the count and 1 day off the end of the count. 
+•	Magic Wand with white star: Take 1 day off the front of the count and 1 day off the end of the count. 
 
     NOTE: the Magic Wand button will be automatically disabled if the event date is less than 2 days away from current date.
 
-If you exit out of the scene and go back, the Magic Wand will be reset to OFF.
+If you exit out of the scene and go back, the Magic Wand will be reset to the standard countdown values.
 
 
---------------------
+------------------------------------
 Add/Edit Event Scene
---------------------
+-------------------------
 
 Files:
 ------
-BeGoodAddEventViewController.swift
+CMAddEventViewController.swift
 
 
 The Add/Edit Event scene provides a way to add or edit an Event. The user is presented with a new scene and default values. A temporary image is shown.
@@ -131,13 +132,13 @@ Pinch & Pan:
 After selecting an image to be used as your event background, users will have the option of using the pinch and pan gestures to zoom and reposition the image.
 
 
-------------------------
+------------------------------------------
 Event Date Picker Scene:
-------------------------
+-----------------------------
 
 Files:
 ------
-BeGoodPickDateViewController.swift
+CMPickDateViewController.swift
 
 
 The current date or the event date will be the default date shown on the picker view.
@@ -153,13 +154,13 @@ How to use the Event Date Picker scene:
 NOTE: The event date picker will not allow the user to pick a date prior to the current date.
 
 
-------------------------------
+-------------------------------------------------
 Flickr Picture Selector Scene:
-------------------------------
+----------------------------------
 
 Files:
 ------
-BeGoodFlickrViewController.swift
+CMFlickrViewController.swift
 
 
 How to use the Flickr Picture Selector scene:
@@ -173,9 +174,9 @@ How to use the Flickr Picture Selector scene:
 NOTE: If the Flickr search API does not find an image matching the search criteria, a warning message will be given that will suggest trying again.
 
 
------------------
+-----------------------------
 To Do List Scene:
------------------
+--------------------
 
 Files:
 ------
@@ -184,7 +185,7 @@ TodoEditTableViewController.swift
 TodoAddTableViewController.swift
 
 
-“Be Good To Yourself” allows the user to add a To Do List unique to each event.
+Countdown Magic allows the user to add a To Do List unique to each event.
 
 From the Countdown view, tap the Menu icon on the top right.
 
@@ -198,9 +199,9 @@ Next, tap “To Do List” in the Popover view.
 
 
 
--------------------
+-----------------------------------
 Budget Sheet Scene:
--------------------
+-------------------------
 
 Files:
 ------
@@ -209,7 +210,7 @@ BudgetEditTableViewController.swift
 BudgetAddTableViewController.swift
 
 
-“Be Good To Yourself” allows the user to add a budget sheet unique to each event.
+Countdown Magic allows the user to add a budget sheet unique to each event.
 
 From the Countdown view, tap the Menu icon on the top right.
 
@@ -222,9 +223,9 @@ Next, tap “To Do List” in the Popover view.
 •	Tap “Event” to exit the To Do List view.
 
 
-----------------
+---------------------------
 Other App Files:
-----------------
+-------------------
 
 Delegate Files:
 ---------------
@@ -264,11 +265,11 @@ Button Attributes:
 BGButton.swift
 CornerButton.swift
 RoundButton.swift
-ActivitySquare.swift
 
 
 Images:
 -------
-image-placeholder.png
-BGTY1.png
+cm-placeholder.png
+cm-icon.png
+cm2018-Clear.png
 

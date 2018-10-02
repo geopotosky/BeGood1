@@ -1,5 +1,5 @@
 //
-//  BGConstants.swift
+//  CMConstants.swift
 //  Countdown Magic
 //
 //  Created by George Potosky October 2018.
@@ -7,7 +7,7 @@
 //
 
 
-extension BGClient {
+extension CMClient {
     
     //-Constants
     struct Constants {

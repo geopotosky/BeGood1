@@ -11,7 +11,6 @@
 		E52C7FE51BCB0D0E007ABC05 /* Budget.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52C7FE41BCB0D0E007ABC05 /* Budget.swift */; };
 		E53286621BC6F3960081C7F7 /* CornerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53286611BC6F3960081C7F7 /* CornerButton.swift */; };
 		E5629A5F215A76A8000B1C17 /* cm-placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = E5629A5E215A76A7000B1C17 /* cm-placeholder.png */; };
-		E5629A63215D7FC5000B1C17 /* magicTest2.png in Resources */ = {isa = PBXBuildFile; fileRef = E5629A62215D7FC5000B1C17 /* magicTest2.png */; };
 		E5748B5E1BE06394007A0971 /* FlickrTextDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5748B5D1BE06394007A0971 /* FlickrTextDelegate.swift */; };
 		E5748B601BE14CC5007A0971 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5748B5F1BE14CC5007A0971 /* RoundButton.swift */; };
 		E5A515CC1BBDDCD600186690 /* TodoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A515CB1BBDDCD600186690 /* TodoList.swift */; };
@@ -21,8 +20,8 @@
 		E5B7DEBE1BC9E2290026D4CE /* PriceTextDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B7DEBD1BC9E2290026D4CE /* PriceTextDelegate.swift */; };
 		E5B92CBF1BCFD5A10051CA09 /* CMPickDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B92CBE1BCFD5A10051CA09 /* CMPickDateViewController.swift */; };
 		E5B92CC11BCFF2AD0051CA09 /* CMPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B92CC01BCFF2AD0051CA09 /* CMPopoverViewController.swift */; };
-		E5C961AB1BB7032C006D20C8 /* BGClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C961AA1BB7032C006D20C8 /* BGClient.swift */; };
-		E5C961AD1BB70390006D20C8 /* BGConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C961AC1BB70390006D20C8 /* BGConstants.swift */; };
+		E5C961AB1BB7032C006D20C8 /* CMClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C961AA1BB7032C006D20C8 /* CMClient.swift */; };
+		E5C961AD1BB70390006D20C8 /* CMConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C961AC1BB70390006D20C8 /* CMConstants.swift */; };
 		E5C961AF1BB70A54006D20C8 /* CMFlickrViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C961AE1BB70A54006D20C8 /* CMFlickrViewController.swift */; };
 		E5D00EDC1BADFF4300971CC6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D00EDB1BADFF4300971CC6 /* AppDelegate.swift */; };
 		E5D00EDE1BADFF4300971CC6 /* CMAddEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D00EDD1BADFF4300971CC6 /* CMAddEventViewController.swift */; };
@@ -61,7 +60,6 @@
 		E52C7FE41BCB0D0E007ABC05 /* Budget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Budget.swift; sourceTree = "<group>"; };
 		E53286611BC6F3960081C7F7 /* CornerButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CornerButton.swift; sourceTree = "<group>"; };
 		E5629A5E215A76A7000B1C17 /* cm-placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cm-placeholder.png"; sourceTree = "<group>"; };
-		E5629A62215D7FC5000B1C17 /* magicTest2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = magicTest2.png; sourceTree = "<group>"; };
 		E5748B5D1BE06394007A0971 /* FlickrTextDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrTextDelegate.swift; sourceTree = "<group>"; };
 		E5748B5F1BE14CC5007A0971 /* RoundButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		E5A515CB1BBDDCD600186690 /* TodoList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoList.swift; sourceTree = "<group>"; };
@@ -71,8 +69,8 @@
 		E5B7DEBD1BC9E2290026D4CE /* PriceTextDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PriceTextDelegate.swift; sourceTree = "<group>"; };
 		E5B92CBE1BCFD5A10051CA09 /* CMPickDateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CMPickDateViewController.swift; path = ../CMPickDateViewController.swift; sourceTree = "<group>"; };
 		E5B92CC01BCFF2AD0051CA09 /* CMPopoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CMPopoverViewController.swift; sourceTree = "<group>"; };
-		E5C961AA1BB7032C006D20C8 /* BGClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGClient.swift; sourceTree = "<group>"; };
-		E5C961AC1BB70390006D20C8 /* BGConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGConstants.swift; sourceTree = "<group>"; };
+		E5C961AA1BB7032C006D20C8 /* CMClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CMClient.swift; sourceTree = "<group>"; };
+		E5C961AC1BB70390006D20C8 /* CMConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CMConstants.swift; sourceTree = "<group>"; };
 		E5C961AE1BB70A54006D20C8 /* CMFlickrViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CMFlickrViewController.swift; sourceTree = "<group>"; };
 		E5D00ED61BADFF4300971CC6 /* Countdown Magic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Countdown Magic.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5D00EDA1BADFF4300971CC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -124,7 +122,6 @@
 				E511C9231BC47FA1000B26B7 /* MGButton.swift */,
 				E53286611BC6F3960081C7F7 /* CornerButton.swift */,
 				E5748B5F1BE14CC5007A0971 /* RoundButton.swift */,
-				E5629A62215D7FC5000B1C17 /* magicTest2.png */,
 				E5629A5E215A76A7000B1C17 /* cm-placeholder.png */,
 				E5FF0090215187850008AEBA /* cm-icon.pdf */,
 				E5FF00802150372E0008AEBA /* cm2018-Clear.png */,
@@ -135,8 +132,8 @@
 		E5C961A91BB70307006D20C8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				E5C961AA1BB7032C006D20C8 /* BGClient.swift */,
-				E5C961AC1BB70390006D20C8 /* BGConstants.swift */,
+				E5C961AA1BB7032C006D20C8 /* CMClient.swift */,
+				E5C961AC1BB70390006D20C8 /* CMConstants.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -334,7 +331,6 @@
 				E5FF00812150372E0008AEBA /* cm2018-Clear.png in Resources */,
 				E5FF0091215187850008AEBA /* cm-icon.pdf in Resources */,
 				E5D00EE11BADFF4300971CC6 /* Main.storyboard in Resources */,
-				E5629A63215D7FC5000B1C17 /* magicTest2.png in Resources */,
 				E5D00EE61BADFF4300971CC6 /* LaunchScreen.xib in Resources */,
 				E5FF007D214DB10A0008AEBA /* Default-568h@2x.png in Resources */,
 				E5D00EE31BADFF4300971CC6 /* Images.xcassets in Resources */,
@@ -365,7 +361,7 @@
 				E5D00F0D1BAE0C8300971CC6 /* EventTextDelegate.swift in Sources */,
 				E5D00F031BAE056B00971CC6 /* CMTableViewController.swift in Sources */,
 				E5D00EDC1BADFF4300971CC6 /* AppDelegate.swift in Sources */,
-				E5C961AB1BB7032C006D20C8 /* BGClient.swift in Sources */,
+				E5C961AB1BB7032C006D20C8 /* CMClient.swift in Sources */,
 				E5B7DEBA1BC9E1500026D4CE /* BudgetEditTableViewController.swift in Sources */,
 				E5A515CC1BBDDCD600186690 /* TodoList.swift in Sources */,
 				E5748B5E1BE06394007A0971 /* FlickrTextDelegate.swift in Sources */,
@@ -373,7 +369,7 @@
 				E5B7DEBE1BC9E2290026D4CE /* PriceTextDelegate.swift in Sources */,
 				E5748B601BE14CC5007A0971 /* RoundButton.swift in Sources */,
 				E5D00F0B1BAE0BF000971CC6 /* Events.swift in Sources */,
-				E5C961AD1BB70390006D20C8 /* BGConstants.swift in Sources */,
+				E5C961AD1BB70390006D20C8 /* CMConstants.swift in Sources */,
 				E5D00EFE1BADFFF100971CC6 /* CoreDataStackManager.swift in Sources */,
 				E5B7DEB81BC9E10D0026D4CE /* BudgetTableViewController.swift in Sources */,
 				E53286621BC6F3960081C7F7 /* CornerButton.swift in Sources */,

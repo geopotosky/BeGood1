@@ -120,7 +120,7 @@ class CMFlickrViewController: UIViewController, UISearchBarDelegate {
         } else {
             
             //-Call the Get Flickr Images function
-            BGClient.sharedInstance().getFlickrData(self) { (success, pictureURL, errorString) in
+            CMClient.sharedInstance().getFlickrData(self) { (success, pictureURL, errorString) in
                 
                 if success {
                     
