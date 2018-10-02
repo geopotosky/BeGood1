@@ -255,14 +255,14 @@ Budget.swift
 Model Object:
 -------------
 
-BGClient.swift: Class for running the Flickr API
-BGConstants.swift: Shared static values
+CMClient.swift: Class for running the Flickr API
+CMConstants.swift: Shared static values
 
 
 Button Attributes:
 ------------------
 
-BGButton.swift
+MGButton.swift
 CornerButton.swift
 RoundButton.swift
 
