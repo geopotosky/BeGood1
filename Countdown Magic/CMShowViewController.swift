@@ -2,8 +2,8 @@
 //  CMShowViewController.swift
 //  Countdown Magic
 //
-//  Created by George Potosky October 2018.
-//  Copyright (c) 2018 GeoWorld. All rights reserved.
+//  Created by George Potosky 2019.
+//  GeozWorld Enterprises (tm). All rights reserved.
 //
 
 
@@ -90,7 +90,7 @@ class CMShowViewController : UIViewController, NSFetchedResultsControllerDelegat
         self.untilEventText2.layer.shadowColor = UIColor.black.cgColor
         self.untilEventText2.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
         self.untilEventText2.layer.shadowRadius = 7.0
-        self.untilEventText2.layer.shadowOpacity = 0.5
+        self.untilEventText2.layer.shadowOpacity = 0.6
         self.untilEventText2.layer.masksToBounds = false
 
         //-UNTIL Description blur effects
@@ -98,7 +98,7 @@ class CMShowViewController : UIViewController, NSFetchedResultsControllerDelegat
         self.eventDescriptionLabel.layer.shadowColor = UIColor.black.cgColor
         self.eventDescriptionLabel.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
         self.eventDescriptionLabel.layer.shadowRadius = 7.0
-        self.eventDescriptionLabel.layer.shadowOpacity = 0.5
+        self.eventDescriptionLabel.layer.shadowOpacity = 0.6
         self.eventDescriptionLabel.layer.masksToBounds = false
         
         do {
@@ -504,10 +504,13 @@ class CMShowViewController : UIViewController, NSFetchedResultsControllerDelegat
         }
         
         //-Set the default segment value (days)
-        let tempText1 = String(stringInterpolationSegment: self.durationDays)
+        //let tempText1 = String(stringInterpolationSegment: self.durationDays)
+        //let tempText1 = String(string: self.durationDays)
+        //let tempText1 = String(stringLiteral: self.durationDays)
         
         //-Check for end of event
-        if tempText1 == "-1" {
+        //if tempText1 == "-1" {
+        if self.durationDays == -1 {
             self.untilEventText2.text = "ZERO Days"
         }
         
@@ -525,12 +528,12 @@ class CMShowViewController : UIViewController, NSFetchedResultsControllerDelegat
         //-Set the Magic Factor (172800 = 2 days in seconds) and update the button label
         if mgFactorValue == 0 {
             mgFactorValue = 172800
-            sender.setImage(UIImage(named: "magicON.png"), for: UIControlState.normal)
+            sender.setImage(UIImage(named: "magicON.png"), for: UIControl.State.normal)
             
         }
         else {
             mgFactorValue = 0
-            sender.setImage(UIImage(named: "magicOFF.png"), for: UIControlState.normal)
+            sender.setImage(UIImage(named: "magicOFF.png"), for: UIControl.State.normal)
             
         }
         
@@ -603,7 +606,7 @@ extension CMShowViewController {
         let activityVC = UIActivityViewController(activityItems: [self.shareEventImage!], applicationActivities: nil)
         
         activityVC.excludedActivityTypes =  [
-            UIActivityType.saveToCameraRoll
+            UIActivity.ActivityType.saveToCameraRoll
             //UIActivityTypePostToTwitter,
             //UIActivityTypePostToFacebook,
             //UIActivityTypePostToWeibo,

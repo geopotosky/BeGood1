@@ -2,8 +2,8 @@
 //  CMTableViewController.swift
 //  Countdown Magic
 //
-//  Created by George Potosky October 2018.
-//  Copyright (c) 2018 GeoWorld. All rights reserved.
+//  Created by George Potosky 2019.
+//  GeozWorld Enterprises (tm). All rights reserved.
 //
 
 import UIKit
@@ -31,7 +31,7 @@ class CMTableViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         //-Create Navbar Buttons
         self.navigationItem.leftBarButtonItem = self.editButtonItem
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(CMTableViewController.addEvent))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(CMTableViewController.addEvent))
         
         //-Manage Top and Bottom bar colors
         //-Green Bars
@@ -201,7 +201,7 @@ class CMTableViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle,
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle,
         forRowAt indexPath: IndexPath) {
 
             switch (editingStyle) {
@@ -306,7 +306,9 @@ class CMTableViewController: UIViewController, UITableViewDelegate, UITableViewD
             case .move:
                 tableView.deleteRows(at: [indexPath!], with: .fade)
                 tableView.insertRows(at: [newIndexPath!], with: .fade)
-            }
+            @unknown default:break
+               // <#fatalError()#>
+        }
     }
  
     

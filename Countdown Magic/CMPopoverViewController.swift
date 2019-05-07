@@ -2,8 +2,8 @@
 //  CMPopoverViewController.swift
 //  Countdown Magic
 //
-//  Created by George Potosky October 2018.
-//  Copyright (c) 2018 GeoWorld. All rights reserved.
+//  Created by George Potosky 2019.
+//  GeozWorld Enterprises (tm). All rights reserved.
 //
 
 
@@ -38,7 +38,7 @@ class CMPopoverViewController: UITableViewController, UIPopoverPresentationContr
         super.init(coder: aDecoder)!
         
         //-Cancel button
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(CMPopoverViewController.tapCancel(_:)))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.cancel, target: self, action: #selector(CMPopoverViewController.tapCancel(_:)))
         //-Popover settings
         modalPresentationStyle = .popover
         popoverPresentationController!.delegate = self

@@ -2,8 +2,8 @@
 //  CMAddEventViewController.swift
 //  Countdown Magic
 //
-//  Created by George Potosky October 2018.
-//  Copyright (c) 2018 GeoWorld. All rights reserved.
+//  Created by George Potosky 2019.
+//  GeozWorld Enterprises (tm). All rights reserved.
 //
 
 import UIKit
@@ -62,7 +62,7 @@ class CMAddEventViewController: UIViewController, UIImagePickerControllerDelegat
         //-Set Navbar Title
         self.navigationItem.title = "Event Editor"
         //-Create Navbar Buttons
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.save, target: self, action: #selector(CMAddEventViewController.saveEvent))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.save, target: self, action: #selector(CMAddEventViewController.saveEvent))
         
         //-Hide the Tab Bar
         self.tabBarController?.tabBar.isHidden = true
@@ -187,7 +187,7 @@ class CMAddEventViewController: UIViewController, UIImagePickerControllerDelegat
         }
         
         //-Disable the CAMERA if you are using a simulator without a camera
-        cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)
+        cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera)
        
     }
     
@@ -199,7 +199,7 @@ class CMAddEventViewController: UIViewController, UIImagePickerControllerDelegat
             
             //get the bottom padding below safearea
             self.bottomPadding = view.safeAreaInsets.bottom
-            print("bottom padding:", bottomPadding)
+            print("bottom padding:", bottomPadding as Any)
         }
     }
     
@@ -267,15 +267,18 @@ class CMAddEventViewController: UIViewController, UIImagePickerControllerDelegat
         
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
-        imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
         self.present(imagePicker, animated: true, completion: nil)
     }
     
     //-Select an image for the Event from your Camera Roll
     func imagePickerController(_ imagePicker: UIImagePickerController,
-        didFinishPickingMediaWithInfo info: [String : Any]){
+        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
+// Local variable inserted by Swift 4.2 migrator.
+let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+
             
-            if let eventImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            if let eventImage = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage {
                 imageFlag = 1
                 self.imageViewPicker.image = eventImage
                 self.adjustImageLabel.isHidden = false
@@ -301,7 +304,7 @@ class CMAddEventViewController: UIViewController, UIImagePickerControllerDelegat
     @IBAction func pickAnImageFromCamera (_ sender: AnyObject) {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
-        imagePicker.sourceType = UIImagePickerControllerSourceType.camera
+        imagePicker.sourceType = UIImagePickerController.SourceType.camera
         imageFlag = 2
         self.present(imagePicker, animated: true, completion: nil)
     }
@@ -389,7 +392,7 @@ class CMAddEventViewController: UIViewController, UIImagePickerControllerDelegat
                 self.changedEventImage = createSnapshotOfView()
                 eventImageFinal = self.changedEventImage
             }
-            let eventImage = UIImageJPEGRepresentation(self.eventImageFinal, 100)
+            let eventImage = self.eventImageFinal.jpegData(compressionQuality: 100)
         
         
         //-Verify Selected Date is greater than current date before saving
@@ -664,12 +667,22 @@ extension UIView {
         let imageViewBackground = UIImageView(frame: CGRect(x: 0, y: 0, width: width, height: height))
         
         // you can change the content mode:
-        imageViewBackground.contentMode = UIViewContentMode.scaleAspectFill
+        imageViewBackground.contentMode = UIView.ContentMode.scaleAspectFill
         
         self.addSubview(imageViewBackground)
-        self.sendSubview(toBack: imageViewBackground)
+        self.sendSubviewToBack(imageViewBackground)
     }
 }
 
 
 
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
+	return input.rawValue
+}

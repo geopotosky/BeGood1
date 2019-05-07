@@ -2,8 +2,8 @@
 //  TodoEditTableViewController.swift
 //  Countdown Magic
 //
-//  Created by George Potosky October 2018.
-//  Copyright (c) 2018 GeoWorld. All rights reserved.
+//  Created by George Potosky 2019.
+//  GeozWorld Enterprises (tm). All rights reserved.
 //
 
 

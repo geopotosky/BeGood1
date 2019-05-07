@@ -2,8 +2,8 @@
 //  CMCollectionViewController.swift
 //  Countdown Magic
 //
-//  Created by George Potosky October 2018.
-//  Copyright (c) 2018 GeoWorld. All rights reserved.
+//  Created by George Potosky 2019.
+//  GeozWorld Enterprises (tm). All rights reserved.
 //
 
 import Foundation
@@ -44,8 +44,8 @@ class CMCollectionViewController: UIViewController, UICollectionViewDelegate, UI
         super.viewDidLoad()
         
         //-Create Navbar Buttons
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.edit, target: self, action: #selector(CMCollectionViewController.editButton))
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(CMCollectionViewController.addEvent))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.edit, target: self, action: #selector(CMCollectionViewController.editButton))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(CMCollectionViewController.addEvent))
                 
         //-Manage Top and Bottom bar colors
         self.navigationController!.navigationBar.barTintColor = UIColor(red:0.66,green:0.97,blue:0.59,alpha:1.0)
@@ -130,7 +130,7 @@ class CMCollectionViewController: UIViewController, UICollectionViewDelegate, UI
     override func viewWillDisappear(_ animated: Bool) {
         
         self.navigationItem.hidesBackButton = true
-        let newBackButton = UIBarButtonItem(title: "Edit", style: UIBarButtonItemStyle.plain, target: self, action: #selector(CMCollectionViewController.editButton))
+        let newBackButton = UIBarButtonItem(title: "Edit", style: UIBarButtonItem.Style.plain, target: self, action: #selector(CMCollectionViewController.editButton))
         self.navigationItem.leftBarButtonItem = newBackButton
         
         bottomButton.isHidden = true
@@ -157,7 +157,7 @@ class CMCollectionViewController: UIViewController, UICollectionViewDelegate, UI
             
             //-Recreate navigation Back button and change name to "Edit"
             self.navigationItem.hidesBackButton = true
-            let newBackButton = UIBarButtonItem(title: "Edit", style: UIBarButtonItemStyle.plain, target: self, action: #selector(CMCollectionViewController.editButton))
+            let newBackButton = UIBarButtonItem(title: "Edit", style: UIBarButtonItem.Style.plain, target: self, action: #selector(CMCollectionViewController.editButton))
             self.navigationItem.leftBarButtonItem = newBackButton
             editButtonFlag = true
             //-Hide the bottom text and button
@@ -177,7 +177,7 @@ class CMCollectionViewController: UIViewController, UICollectionViewDelegate, UI
             
             //-Recreate navigation Back button and change name to "Done"
             self.navigationItem.hidesBackButton = true
-            let newBackButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.plain, target: self, action: #selector(CMCollectionViewController.editButton))
+            let newBackButton = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.plain, target: self, action: #selector(CMCollectionViewController.editButton))
             self.navigationItem.leftBarButtonItem = newBackButton
             editButtonFlag = false
             //-Make bottom text visible
@@ -217,7 +217,7 @@ class CMCollectionViewController: UIViewController, UICollectionViewDelegate, UI
             let cell = collectionView.cellForItem(at: indexPath) as! CMCollectionViewCell
             
             //-Whenever a cell is tapped we will toggle its presence in the selectedIndexes array
-            if let index = selectedIndexes.index(of: indexPath) {
+            if let index = selectedIndexes.firstIndex(of: indexPath) {
                 selectedIndexes.remove(at: index)
             }
             else {
@@ -277,7 +277,7 @@ class CMCollectionViewController: UIViewController, UICollectionViewDelegate, UI
         cell.layer.cornerRadius = 7.0
         
         //-Change cell appearance based on selection for deletion
-        if self.selectedIndexes.index(of: indexPath) != nil {
+        if self.selectedIndexes.firstIndex(of: indexPath) != nil {
             cell.eventImageView!.alpha = 0.5
             bottomButton.isHidden = false
             SelectEventLabel.isHidden = true
@@ -336,6 +336,8 @@ class CMCollectionViewController: UIViewController, UICollectionViewDelegate, UI
             break
         case .move:
             break
+        @unknown default:break
+        // <#fatalError()#>
         }
     }
 

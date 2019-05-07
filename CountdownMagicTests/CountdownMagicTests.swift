@@ -2,8 +2,8 @@
 //  CountdownMagicTests.swift
 //  CountdownMagicTests
 //
-//  Created by George Potosky on 9/19/15.
-//  Copyright (c) 2015 GeoWorld. All rights reserved.
+//  Created by George Potosky 2019.
+//  GeozWorld Enterprises (tm). All rights reserved.
 //
 
 import UIKit

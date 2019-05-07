@@ -2,8 +2,8 @@
 //  BudgetTableViewController.swift
 //  Countdown Magic
 //
-//  Created by George Potosky October 2018.
-//  Copyright (c) 2018 GeoWorld. All rights reserved.
+//  Created by George Potosky 2019.
+//  GeozWorld Enterprises (tm). All rights reserved.
 //
 
 import UIKit
@@ -32,11 +32,11 @@ class BudgetTableViewController: UITableViewController, NSFetchedResultsControll
         self.navigationController?.toolbar.barTintColor = UIColor(red: 0.66, green: 0.97, blue: 0.59, alpha: 1.0)
         
         //-Create NavBar Items
-        let newBackButton = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.plain, target: self, action: #selector(BudgetTableViewController.cancelBudgetList))
+        let newBackButton = UIBarButtonItem(title: "Back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(BudgetTableViewController.cancelBudgetList))
         self.navigationItem.leftBarButtonItem = newBackButton
         
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(BudgetTableViewController.addBudgetList))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(BudgetTableViewController.addBudgetList))
         
         //-Show the toolBar
         self.navigationController!.setToolbarHidden(false, animated: true)
@@ -139,7 +139,7 @@ class BudgetTableViewController: UITableViewController, NSFetchedResultsControll
 
     
     override func tableView(_ tableView: UITableView,
-        commit editingStyle: UITableViewCellEditingStyle,
+        commit editingStyle: UITableViewCell.EditingStyle,
         forRowAt indexPath: IndexPath) {
             
             switch (editingStyle) {
@@ -215,6 +215,9 @@ class BudgetTableViewController: UITableViewController, NSFetchedResultsControll
         case .move:
             tableView.deleteRows(at: [indexPath!], with: .fade)
             tableView.insertRows(at: [newIndexPath!], with: .fade)
+            
+        @unknown default:break
+           // <#fatalError()#>
         }
         
     }
