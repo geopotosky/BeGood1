@@ -273,3 +273,4 @@ cm-placeholder.png
 cm-icon.png
 cm2018-Clear.png
 
+# countdownmagic
